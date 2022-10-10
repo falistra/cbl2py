@@ -1,6 +1,7 @@
 import string
 import typing
 from typing import TextIO
+import re
 
 from cbl2py.preprocessor.CobolCommentEntriesMarker import CobolCommentEntriesMarker
 from cbl2py.preprocessor.CobolDocumentParser import CobolDocumentParser
@@ -9,8 +10,11 @@ from cbl2py.preprocessor.CobolLineIndicatorProcessor import CobolLineIndicatorPr
 from cbl2py.preprocessor.CobolLineReader import CobolLineReader
 from cbl2py.preprocessor.CobolLineWriter import CobolLineWriter
 
+from enum import Enum
 
 class CobolPreprocessor:
+
+
     def createCommentEntriesMarker(self) -> CobolCommentEntriesMarker:
         return  CobolCommentEntriesMarker()
 
@@ -36,21 +40,21 @@ class CobolPreprocessor:
  
     @typing.overload
     def process(self, source: TextIO, params) -> string:
-   		# final Charset charset = params.getCharset();
+   		# final Charset charset = params.getCharset()
 
 		# LOG.info("Preprocessing file {} with line format {} and charset {}.", cobolFile.getName(), params.getFormat(),
-		# 		charset);
+		# 		charset)
 
-		# final String cobolFileContent = Files.readString(cobolFile.toPath(), charset);
-		# final String result = process(cobolFileContent, params);
-		# return result;
+		# final String cobolFileContent = Files.readString(cobolFile.toPath(), charset)
+		# final String result = process(cobolFileContent, params)
+		# return result
         ...
     @typing.overload
     def process(self, source: string, params) -> string:
-		# final List<CobolLine> lines = readLines(cobolCode, params);
-		# final List<CobolLine> rewrittenLines = rewriteLines(lines);
-		# final String result = parseDocument(rewrittenLines, params);
-		# return result;
+		# final List<CobolLine> lines = readLines(cobolCode, params)
+		# final List<CobolLine> rewrittenLines = rewriteLines(lines)
+		# final String result = parseDocument(rewrittenLines, params)
+		# return result
         ...
     def process(self, source, params) -> string:
         return ""
@@ -67,3 +71,4 @@ class CobolPreprocessor:
         normalizedInlineCommentEntriesLines = self.createInlineCommentEntriesNormalizer().processLines(lineIndicatorProcessedLines)
         result = self.createCommentEntriesMarker().processLines(normalizedInlineCommentEntriesLines)
         return result
+
