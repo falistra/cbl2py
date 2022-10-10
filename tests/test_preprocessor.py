@@ -5,6 +5,7 @@ from cbl2py.antlr4.CobolPreprocessorLexer import CobolPreprocessorLexer
 from cbl2py.antlr4.CobolPreprocessorParser import CobolPreprocessorParser
 
 from cbl2py.preprocessor.ListenerImplementation import ListenerImplementation
+from cbl2py.preprocessor.CobolPreprocessor import CobolPreprocessor
 
 def test_visitor_no_operation():
     with open(FILE_TEST_NAME, encoding='utf8') as cobolCodeFile:
@@ -21,3 +22,7 @@ def test_visitor_no_operation():
         preprocess = ListenerImplementation(params=[],tokens=[])
         walker = ParseTreeWalker()
         walker.walk(preprocess, tree)
+
+def test_preprocessorImpl():
+    pp = CobolPreprocessor()
+
