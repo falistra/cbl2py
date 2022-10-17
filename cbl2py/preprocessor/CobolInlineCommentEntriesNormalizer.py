@@ -14,7 +14,15 @@ class CobolInlineCommentEntriesNormalizer(CobolLineRewriter):
 
 
     def processLine(self, line : CobolLine ) -> CobolLine:
-        pass
+        matcher: typing.Match = self.pattern.match(line)
+        result: CobolLine
+        if (not matcher):
+            result = line
+        else:
+            newContentArea : string = line.getContentArea().replace(CobolPreprocessorTokens.COMMENT_TAG,\
+					CobolPreprocessorTokens.COMMENT_TAG + CobolPreprocessorTokens.WS)
+            result = CobolLine.copyCobolLineWithContentArea(newContentArea, line)
+        return result
 
     def processLines(self, lines : list[CobolLine]) -> list[CobolLine]:
         result : list[CobolLine] = []
