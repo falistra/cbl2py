@@ -1,19 +1,18 @@
-import string
 import typing
 from typing import TextIO
-import re
 
 from cbl2py.preprocessor.CobolCommentEntriesMarker import CobolCommentEntriesMarker
+
 from cbl2py.preprocessor.CobolDocumentParser import CobolDocumentParser
 from cbl2py.preprocessor.CobolInlineCommentEntriesNormalizer import CobolInlineCommentEntriesNormalizer
 from cbl2py.preprocessor.CobolLineIndicatorProcessor import CobolLineIndicatorProcessor
 from cbl2py.preprocessor.CobolLineReader import CobolLineReader
 from cbl2py.preprocessor.CobolLineWriter import CobolLineWriter
+from cbl2py.asg.params.CobolParserParams import CobolParserParams
+from cbl2py.preprocessor.CobolLine import CobolLine
 
-from enum import Enum
 
 class CobolPreprocessor:
-
 
     def createCommentEntriesMarker(self) -> CobolCommentEntriesMarker:
         return  CobolCommentEntriesMarker()
@@ -33,33 +32,25 @@ class CobolPreprocessor:
     def createLineWriter(self) -> CobolLineWriter :
         return  CobolLineWriter()
 
-    def parseDocument(self, lines, params) -> string:
+    def parseDocument(self, lines : list[CobolLine] , params  : CobolParserParams) -> str:
         code = self.createLineWriter().serialize(lines)
         result = self.createDocumentParser().processLines(code, params)
         return result
  
     @typing.overload
-    def process(self, source: TextIO, params) -> string:
-   		# final Charset charset = params.getCharset()
+    def process(self, cobolFile: TextIO, params : CobolParserParams) -> str:
+        cobolFileContent : str = cobolFile.toString()
+        result = self.process(cobolFileContent, params)
+        return result
 
-		# LOG.info("Preprocessing file {} with line format {} and charset {}.", cobolFile.getName(), params.getFormat(),
-		# 		charset)
-
-		# final String cobolFileContent = Files.readString(cobolFile.toPath(), charset)
-		# final String result = process(cobolFileContent, params)
-		# return result
-        ...
     @typing.overload
-    def process(self, source: string, params) -> string:
-		# final List<CobolLine> lines = readLines(cobolCode, params)
-		# final List<CobolLine> rewrittenLines = rewriteLines(lines)
-		# final String result = parseDocument(rewrittenLines, params)
-		# return result
-        ...
-    def process(self, source, params) -> string:
-        return ""
+    def process(self, source: str, params) -> str:
+        lines : list[CobolLine] = self.readLines(source, params)
+        rewrittenLines : list[CobolLine] = self.rewriteLines(lines)
+        result : str = self.parseDocument(rewrittenLines, params)
+        return result
 
-    def readLines(self, cobolCode: string , params) -> list:
+    def readLines(self, cobolCode: str , params) -> list:
         lines = self.createLineReader().processLines(cobolCode, params)
 
     def rewriteLines(self,lines: list) -> list:

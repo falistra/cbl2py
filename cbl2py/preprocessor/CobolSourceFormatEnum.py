@@ -1,7 +1,5 @@
 from cbl2py.preprocessor.CobolPreprocessorTokens import CobolPreprocessorTokens
 
-import string
-from enum import Enum
 import typing
 import re
 
@@ -11,7 +9,7 @@ class CobolSourceFormatEnum():
 	TANDEM = "()(?:" + CobolPreprocessorTokens.INDICATOR_FIELD + "(.{0,4})(.*)())?"
 	VARIABLE = "(.{0,6})(?:" + CobolPreprocessorTokens.INDICATOR_FIELD + "(.{0,4})(.*)())?"
 
-	def __init__(self, regex: string, commentEntryMultiLine: bool):
+	def __init__(self, regex: str, commentEntryMultiLine: bool):
 		self.regex = regex
 		self.pattern : typing.Pattern = re.compile(self.regex)
 		self.commentEntryMultiLine = commentEntryMultiLine

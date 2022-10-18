@@ -1,4 +1,3 @@
-import string
 import re
 import typing
 
@@ -21,7 +20,7 @@ class CobolCommentEntriesMarker(CobolLineRewriter):
 			"DATE-COMPILED.", "SECURITY.", "REMARKS." ]
 
     def __init__(self):
-        commentEntryTriggerLineFormat = "([ \\t]*)(" + string.join("|", self.triggersStart) + ")(.+)"
+        commentEntryTriggerLineFormat = "([ \\t]*)(" + str.join("|", self.triggersStart) + ")(.+)"
         self.commentEntryTriggerLinePattern = re.compile(commentEntryTriggerLineFormat,re.IGNORECASE)
 
     def buildMultiLineCommentEntryLine(self,line : CobolLine) -> CobolLine :
@@ -94,7 +93,7 @@ class CobolCommentEntriesMarker(CobolLineRewriter):
         if (foundCommentEntryTriggerInCurrentLine) :
             result = self.escapeCommentEntry(line)
         elif (self.foundCommentEntryTriggerInPreviousLine or self.isInCommentEntry):
-            isContentAreaAEmpty : bool = (line.getContentAreaA().trim() == "")
+            isContentAreaAEmpty : bool = (line.getContentAreaA().strip() == "")
             isInOsvsCommentEntry : bool = self.isInOsvsCommentEntry(line)
             isInCommentEntry : bool = self.isInCommentEntry(line, isContentAreaAEmpty, isInOsvsCommentEntry)
 
@@ -125,13 +124,13 @@ class CobolCommentEntriesMarker(CobolLineRewriter):
 	#  */
 
     def startsWithTrigger(self, line : CobolLine, triggers : list[str]) -> bool :
-        contentAreaUpperCase : string = line.getContentArea().upper()
+        contentAreaUpperCase : str = line.getContentArea().upper()
 
         result : bool = False
-        trigger : string
+        trigger : str
 
         for trigger in triggers: 
-            containsTrigger : bool = contentAreaUpperCase.trim().startsWith(trigger)
+            containsTrigger : bool = contentAreaUpperCase.strip().startsWith(trigger)
 
             if (containsTrigger) :
                 result = True

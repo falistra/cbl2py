@@ -3,7 +3,7 @@ from cbl2py.asg.params.CobolDialect import CobolDialect
 from cbl2py.preprocessor.CobolSourceFormatEnum import CobolSourceFormatEnum
 
 class CobolParserParams() :
-    charset = codecs.utf_8_decode # StandardCharsets.UTF_8
+    charset = 'utf-8' # codecs.utf_8_decode # StandardCharsets.UTF_8
     copyBookDirectories : list # list<File> 
     copyBookExtensions : list # list<String> 
     copyBookFiles : list # list<File> 

@@ -2,20 +2,19 @@ from cbl2py.asg.params.CobolDialect import CobolDialect
 from cbl2py.preprocessor.CobolPreprocessorTokens import CobolPreprocessorTokens
 from cbl2py.preprocessor.CobolSourceFormatEnum import CobolSourceFormatEnum
 from cbl2py.preprocessor.CobolLineTypeEnum import CobolLineTypeEnum
-import string
 
 class CobolLine():
 
     @classmethod
-    def extractContentAreaA(contentArea: string) :
-        return contentArea.substring(0, 4) if len(contentArea) > 4 else contentArea
+    def extractContentAreaA(contentArea: str) :
+        return contentArea[0 : 4] if len(contentArea) > 4 else contentArea
 
     @classmethod
-    def extractContentAreaB(contentArea: string) :
-        return contentArea.substring(0, 4) if len(contentArea) > 4 else ""
+    def extractContentAreaB(contentArea: str) :
+        return contentArea[0 : 4] if len(contentArea) > 4 else ""
 
     @classmethod
-    def copyCobolLineWithContentArea(contentArea: string, line) :
+    def copyCobolLineWithContentArea(contentArea: str, line) :
         return CobolLine( 
             line.sequenceArea, 
             line.sequenceAreaOriginal, 
@@ -35,7 +34,7 @@ class CobolLine():
             line.successor)
 
     @classmethod
-    def copyCobolLineWithIndicatorAndContentArea(indicatorArea : string, contentArea: string, line):
+    def copyCobolLineWithIndicatorAndContentArea(indicatorArea : str, contentArea: str, line):
             return CobolLine(
                 line.sequenceArea, 
                 line.sequenceAreaOriginal, 
@@ -55,7 +54,7 @@ class CobolLine():
                 line.successor)
 
     @classmethod
-    def copyCobolLineWithIndicatorArea(indicatorArea : string, contentArea: string, line):
+    def copyCobolLineWithIndicatorArea(indicatorArea : str, contentArea: str, line):
             return CobolLine(
                 line.sequenceArea, 
                 line.sequenceAreaOriginal, 
@@ -79,12 +78,12 @@ class CobolLine():
         return "" if format is CobolSourceFormatEnum.TANDEM else CobolPreprocessorTokens.WS*6
 
     @classmethod
-    def extractContentAreaA(contentArea: string):
-        return contentArea.substring(0, 4) if len(contentArea) > 4 else contentArea
+    def extractContentAreaA(contentArea: str):
+        return contentArea[0 : 4] if len(contentArea) > 4 else contentArea
 
     @classmethod
-    def extractContentAreaB(contentArea: string):
-        return contentArea.substring(0, 4) if len(contentArea) > 4 else ""
+    def extractContentAreaB(contentArea: str):
+        return contentArea[0 : 4] if len(contentArea) > 4 else ""
 
     @classmethod
     def newCobolLine(self,sequenceArea, indicatorArea, contentAreaA, contentAreaB, commentArea,
@@ -101,34 +100,34 @@ class CobolLine():
             format, dialect, 
             lineNumber, type, None, None)
 
-    commentArea : string
-    commentAreaOriginal : string 
-    contentAreaA : string
-    contentAreaAOriginal : string
-    contentAreaB : string
-    contentAreaBOriginal : string
+    commentArea : str
+    commentAreaOriginal : str 
+    contentAreaA : str
+    contentAreaAOriginal : str
+    contentAreaB : str
+    contentAreaBOriginal : str
     dialect : CobolDialect 
     format : CobolSourceFormatEnum
-    indicatorArea : string
-    indicatorAreaOriginal : string
+    indicatorArea : str
+    indicatorAreaOriginal : str
     number : int
     # predecessor 
-    sequenceArea : string
-    sequenceAreaOriginal : string
+    sequenceArea : str
+    sequenceAreaOriginal : str
     # successor 
     type : CobolLineTypeEnum 
 
     def __init__(self,
-        sequenceArea: string, 
-        sequenceAreaOriginal: string, 
-        indicatorArea: string,
-        indicatorAreaOriginal: string,
-        contentAreaA: string,
-        contentAreaAOriginal: string,
-        contentAreaB: string,
-        contentAreaBOriginal: string,
-        commentArea: string,
-        commentAreaOriginal: string,
+        sequenceArea: str, 
+        sequenceAreaOriginal: str, 
+        indicatorArea: str,
+        indicatorAreaOriginal: str,
+        contentAreaA: str,
+        contentAreaAOriginal: str,
+        contentAreaB: str,
+        contentAreaBOriginal: str,
+        commentArea: str,
+        commentAreaOriginal: str,
         format: CobolSourceFormatEnum,
         dialect: CobolDialect,
 		number: int,
@@ -214,7 +213,7 @@ class CobolLine():
     def getType(self) -> CobolLineTypeEnum:
         return self.type
 
-    def serialize(self) -> string :
+    def serialize(self) -> str :
         return self.sequenceArea + self.indicatorArea + self.contentAreaA + self.contentAreaB + self.commentArea
 
     def setPredecessor(self, predecessor) :
