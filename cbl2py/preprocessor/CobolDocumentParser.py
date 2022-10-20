@@ -1,4 +1,3 @@
-import string
 from antlr4 import *
 
 from cbl2py.asg.params.CobolParserParams import CobolParserParams
@@ -12,8 +11,8 @@ class CobolDocumentParser:
     triggers = [ "cbl", "copy", "exec sql", "exec sqlims", "exec cics", "process",
             "replace", "eject", "skip1", "skip2", "skip3", "title" ]
 
-    def containsTrigger(self, code: string, triggers:list(string)):
-        codeLowerCase : string = code.lower()
+    def containsTrigger(self, code: str, triggers:list[str]):
+        codeLowerCase : str = code.lower()
         result : bool = False
 
         for trigger in triggers:
@@ -26,16 +25,16 @@ class CobolDocumentParser:
     def createDocumentParserListener(params : CobolParserParams, tokens: CommonTokenStream) -> CobolDocumentParserListener:
         return  CobolDocumentParserListener(params, tokens)
 
-    def processLines(self, code: string , params : CobolParserParams) -> string:
+    def processLines(self, code: str , params : CobolParserParams) -> str:
         requiresProcessorExecution : bool = self.containsTrigger(code, self.triggers);
-        result : string
+        result : str
         if (requiresProcessorExecution):
             result = self.processWithParser(code, params)
         else:
             result = code
         return result
 
-    def processWithParser(self, code : string, params : CobolParserParams) -> string:
+    def processWithParser(self, code : str, params : CobolParserParams) -> str:
         # run lexer        
         data =  InputStream(code)
         lexer = CobolPreprocessorLexer(data)
@@ -61,5 +60,5 @@ class CobolDocumentParser:
         walker : ParseTreeWalker = ParseTreeWalker()
         walker.walk(listener, startRule)
 
-        result : string = listener.context().read()
+        result : str = listener.context().read()
         return result

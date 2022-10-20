@@ -1,4 +1,3 @@
-import string
 import re
 import typing
 
@@ -9,7 +8,7 @@ from cbl2py.preprocessor.CobolPreprocessorTokens import CobolPreprocessorTokens
 
 class CobolInlineCommentEntriesNormalizer(CobolLineRewriter):
     
-    denormalizedCommentEntryRegex : string = "\\*>[^ ]"
+    denormalizedCommentEntryRegex : str= "\\*>[^ ]"
     pattern : typing.Pattern  = re.compile(denormalizedCommentEntryRegex)
 
 
@@ -19,7 +18,7 @@ class CobolInlineCommentEntriesNormalizer(CobolLineRewriter):
         if (not matcher):
             result = line
         else:
-            newContentArea : string = line.getContentArea().replace(CobolPreprocessorTokens.COMMENT_TAG,\
+            newContentArea : str= line.getContentArea().replace(CobolPreprocessorTokens.COMMENT_TAG,\
 					CobolPreprocessorTokens.COMMENT_TAG + CobolPreprocessorTokens.WS)
             result = CobolLine.copyCobolLineWithContentArea(newContentArea, line)
         return result

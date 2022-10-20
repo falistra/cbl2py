@@ -1,6 +1,6 @@
 from cbl2py.asg.util.StringBuffer import StringBuffer
 from cbl2py.preprocessor.CobolReplacementMapping import CobolReplacementMapping
-from cbl2py.antlr4.CobolPreprocessorParser import ReplaceClauseContext
+from cbl2py.antlr4.CobolPreprocessorParser import CobolPreprocessorParser # ReplaceClauseContext
 
 from antlr4.BufferedTokenStream import BufferedTokenStream
 
@@ -28,7 +28,7 @@ class CobolDocumentContext:
                 self.outputBuffer =  StringBuffer()
                 self.outputBuffer.append(replacedOutput)
 
-    def storeReplaceablesAndReplacements(self, replaceClauses : list[ReplaceClauseContext] ) :
+    def storeReplaceablesAndReplacements(self, replaceClauses : list[CobolPreprocessorParser.ReplaceClauseContext] ) :
         if (replaceClauses == None):
             self.currentReplaceableReplacements = None
         else:

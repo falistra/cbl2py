@@ -1,6 +1,6 @@
 import antlr4.error.ErrorListener as ErrorListener
 
-class ThrowingErrorListener(ErrorListener):
+class ThrowingErrorListener(): # ErrorListener
 
     # import io.proleap.cobol.asg.exception.CobolParserException;
 	# @Override

@@ -1,5 +1,3 @@
-import string
-
 from cbl2py.preprocessor.CobolLine import CobolLine
 from cbl2py.preprocessor.CobolLineRewriter import CobolLineRewriter
 from cbl2py.preprocessor.CobolLineTypeEnum import CobolLineTypeEnum
@@ -7,17 +5,17 @@ from cbl2py.preprocessor.CobolPreprocessorTokens import CobolPreprocessorTokens
 
 class CobolLineIndicatorProcessor(CobolLineRewriter):
     
-    EMPTY_STRING : string = ""
+    EMPTY_STRING : str = ""
 
     def isNextLineContinuation(self,line : CobolLine ) -> bool:
         return False if (line.getSuccessor() == None) else (CobolLineTypeEnum.CONTINUATION == (line.getSuccessor().getType()))
 
-    def trimLeadingWhitespace(self, contentarea : string) -> string :
+    def trimLeadingWhitespace(self, contentarea : str) -> str:
         return contentarea.replaceAll("^\\s+", self.EMPTY_STRING)
 
-    def repairTrailingComma(self, contentArea : string) -> string :
+    def repairTrailingComma(self, contentArea : str) -> str:
 		
-        result : string
+        result : str
 		# /*
 		#  * repair trimmed whitespace after comma separator
 		#  */
@@ -32,25 +30,25 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
                 result = contentArea
         return result
 
-    def rightTrimContentArea(self,contentarea : string) -> string:
-        contentAreaWithTrimmedTrailingWhitespace : string = self.trimTrailingWhitespace(contentarea)
+    def rightTrimContentArea(self,contentarea : str) -> str:
+        contentAreaWithTrimmedTrailingWhitespace : str= self.trimTrailingWhitespace(contentarea)
         return self.repairTrailingComma(contentAreaWithTrimmedTrailingWhitespace)
 
-    def removeStringLiterals(self,contentArea : string) -> string :
-        doubleQuoteLiteralPattern : string = "\"([^\"]|\"\"|'')*\""
-        singleQuoteLiteralPattern : string = "'([^']|''|\"\")*'"
+    def removeStringLiterals(self,contentArea : str) -> str:
+        doubleQuoteLiteralPattern : str= "\"([^\"]|\"\"|'')*\""
+        singleQuoteLiteralPattern : str= "'([^']|''|\"\")*'"
         return contentArea\
             .replace(doubleQuoteLiteralPattern, self.EMPTY_STRING)\
             .replace(singleQuoteLiteralPattern,self.EMPTY_STRING)
 
     def isEndingWithOpenLiteral(self, line : CobolLine) -> bool :
-        contentArea : string = line.getContentAreaOriginal()
+        contentArea : str= line.getContentAreaOriginal()
         contentAreaWithoutStringLiterals = self.removeStringLiterals(contentArea)
         return ("\"" in contentAreaWithoutStringLiterals) or ("'" in contentAreaWithoutStringLiterals)
 
-    def conditionalRightTrimContentArea(self, line : CobolLine) -> string :
+    def conditionalRightTrimContentArea(self, line : CobolLine) -> str:
 
-        result : string
+        result : str
         
         if (not self.isNextLineContinuation(line)) :
             result = self.rightTrimContentArea(line.getContentArea())
@@ -63,7 +61,7 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
         return result 
 
     def processLine(self, line : CobolLine ) -> CobolLine:
-        conditionalRightTrimmedContentArea : string = self.conditionalRightTrimContentArea(line)
+        conditionalRightTrimmedContentArea : str= self.conditionalRightTrimContentArea(line)
         result : CobolLine
 
         
@@ -103,7 +101,7 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
                 # * If we are ending with an open literal ...
                 # */
                 elif (line.getPredecessor() != None and self.isEndingWithOpenLiteral(line.getPredecessor())) :
-                        trimmedContentArea : string = self.trimLeadingWhitespace(conditionalRightTrimmedContentArea)
+                        trimmedContentArea : str= self.trimLeadingWhitespace(conditionalRightTrimmedContentArea)
 
                         # /**
                         #  * ... the continuation line might start with a single quotation mark. This

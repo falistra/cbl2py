@@ -1,5 +1,3 @@
-import string
-
 from antlr4 import Token
 
 from antlr4 import ParseTreeWalker
@@ -14,13 +12,13 @@ from cbl2py.asg.util.StringBuffer import StringBuffer
 class TokenUtils :
 
     @classmethod
-    def getHiddenTokensToLeft(tokPos : int, tokens: BufferedTokenStream) -> string:
+    def getHiddenTokensToLeft(tokPos : int, tokens: BufferedTokenStream) -> str:
         refChannel : list[Token] = tokens.getHiddenTokensToLeft(tokPos, CobolPreprocessorLexer.HIDDEN)
         sb : StringBuffer = StringBuffer()
 
         if (not refChannel == None):
             for refToken in refChannel:
-                text : string = refToken.getText()
+                text : str = refToken.getText()
                 sb.append(text)
         return sb.toString()
 

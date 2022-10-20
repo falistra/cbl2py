@@ -1,5 +1,3 @@
-import string
-
 from antlr4 import Token
 from antlr4 import BufferedTokenStream
 from antlr4 import TerminalNode
@@ -14,7 +12,7 @@ class CobolHiddenTokenCollectorListener:
         self.outputBuffer : StringBuffer = StringBuffer()
         self.tokens : BufferedTokenStream = tokens 
 
-    def read(self) -> string:
+    def read(self) -> str:
         return self.outputBuffer.toString()
 
     def visitTerminal(self, node : TerminalNode):
@@ -23,6 +21,6 @@ class CobolHiddenTokenCollectorListener:
             self.outputBuffer.append(TokenUtils.getHiddenTokensToLeft(tokPos, self.tokens))
         
         if (not TokenUtils.isEOF(node)):
-            text: string = node.getText()
+            text: str = node.getText()
             self.outputBuffer.append(text)
             self.firstTerminal = False

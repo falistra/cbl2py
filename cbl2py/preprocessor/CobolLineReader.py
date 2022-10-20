@@ -1,4 +1,3 @@
-import string
 from enum import Enum
 import typing
 
@@ -11,14 +10,14 @@ from cbl2py.asg.params.CobolParserParams import CobolParserParams
 
 class CobolLineReader:
 
-    def processLines(self,lines : string , params : CobolParserParams) -> list:
+    def processLines(self,lines : str , params : CobolParserParams) -> list:
         result = []
         for (lineNumber,currentLine) in enumerate(lines.splitlines()):
             currentCobolLine = self.parseLine(currentLine,lineNumber,params)
             result.append(currentCobolLine)
         return result
 
-    def determineType(self,indicatorArea: string) -> CobolLineTypeEnum:
+    def determineType(self,indicatorArea: str) -> CobolLineTypeEnum:
 
         switcher = {
             CobolPreprocessorTokens.CHAR_D    : CobolLineTypeEnum.DEBUG,
@@ -31,7 +30,7 @@ class CobolLineReader:
         
         return switcher.get(indicatorArea,CobolLineTypeEnum.NORMAL)
 
-    def parseLine(self, line: string, lineNumber: int, params : CobolParserParams) -> CobolLine:
+    def parseLine(self, line: str, lineNumber: int, params : CobolParserParams) -> CobolLine:
         format : CobolSourceFormatEnum  = params.getFormat()
         pattern : typing.Pattern  = format.getPattern() # : Pattern
         matcher: typing.Match = pattern.match(line)
@@ -43,7 +42,7 @@ class CobolLineReader:
                 CobolSourceFormatEnum.VARIABLE : "Columns 1-6 sequence number, column 7 indicator area, columns 8 and all following for areas A and B"
             }
             formatDescription = swither.get(format,"")
-            message : string = "Is " + params.getFormat() + " the correct line format (" + formatDescription + ")? Could not parse line " + (lineNumber + 1) + ": " + line
+            message : str = "Is " + params.getFormat() + " the correct line format (" + formatDescription + ")? Could not parse line " + (lineNumber + 1) + ": " + line
 
             raise Exception  # 		throw new CobolPreprocessorException(message);
         else:

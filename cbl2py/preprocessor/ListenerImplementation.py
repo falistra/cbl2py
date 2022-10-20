@@ -1,5 +1,5 @@
 from antlr4 import *
-import string 
+
 
 from cbl2py.antlr4.CobolPreprocessorParser import CobolPreprocessorParser
 from cbl2py.antlr4.CobolPreprocessorListener import CobolPreprocessorListener
@@ -25,7 +25,7 @@ class ListenerImplementation(CobolPreprocessorListener):
 		# }
 
 	
-    def buildLines(self, text: string, linePrefix: string):
+    def buildLines(self, text: str, linePrefix: str):
         pass
     # protected String buildLines(final String text, final String linePrefix) {
 	# 	final StringBuffer sb = new StringBuffer(text.length());
