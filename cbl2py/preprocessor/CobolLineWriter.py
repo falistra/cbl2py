@@ -1,4 +1,3 @@
-import string
 
 from cbl2py.preprocessor.CobolPreprocessor import CobolPreprocessor
 from cbl2py.preprocessor.CobolLine import CobolLine
@@ -7,7 +6,7 @@ from cbl2py.asg.util.StringBuffer import StringBuffer
 
 class CobolLineWriter:
 
-    def serialize(self, lines: list[CobolLine]) -> string:
+    def serialize(self, lines: list[CobolLine]) -> str:
         sb : StringBuffer = StringBuffer()
 
         line : CobolLine 
