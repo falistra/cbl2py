@@ -40,7 +40,7 @@ The scanner can also use string delimeters other than whitespace.
 By default, the scanner does a str split. If forced, a regex pattern can also
 be used. As expected, the latter method is slower:
     content = '1 fish  2.5 fish red fish  blue fish
-    sc = Scanner(source=content, delim='\S*fish\S*', force_regex=True)
+    sc = Scanner(source=content, delim='\\S*fish\\S*', force_regex=True)
     sc.next_int() # 1
     sc.has_next() # True
     sc.next_float() # 2.5

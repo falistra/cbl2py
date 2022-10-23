@@ -1,5 +1,5 @@
 
-from cbl2py.preprocessor.CobolPreprocessor import CobolPreprocessor
+from cbl2py.preprocessor.CobolPreprocessorTokens import CobolPreprocessorTokens
 from cbl2py.preprocessor.CobolLine import CobolLine
 from cbl2py.preprocessor.CobolLineTypeEnum import CobolLineTypeEnum
 from cbl2py.asg.util.StringBuffer import StringBuffer
@@ -15,7 +15,7 @@ class CobolLineWriter:
 
         if (notContinuationLine) :
             if (line.getNumber() > 0) :
-                sb.append(CobolPreprocessor.NEWLINE)
+                sb.append(CobolPreprocessorTokens.NEWLINE)
 
             sb.append(line.getBlankSequenceArea())
             sb.append(line.getIndicatorArea())
