@@ -1,0 +1,19 @@
+1) type enum in java
+cbl2py/preprocessor/CobolPreprocessor.py : CobolSourceFormatEnum
+
+2) cbl2py/asg/params/CobolParserParams.py
+charset = codecs.utf_8_decode # StandardCharsets.UTF_8
+
+CobolPreprocessor 
+    CobolCommonEntriesMarker
+        CobolDialect X
+        CobolLine X
+            CobolDialect X
+            CobolPreprocessorTokens X
+            CobolSourceFormatEnum X
+            CobolLineTypeEnum X
+
+
+        CobolLineRewriter
+        CobolLineTypeEnum
+        CobolPreprocessorTokens
