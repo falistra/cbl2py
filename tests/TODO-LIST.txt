@@ -4,16 +4,50 @@ cbl2py/preprocessor/CobolPreprocessor.py : CobolSourceFormatEnum
 2) cbl2py/asg/params/CobolParserParams.py
 charset = codecs.utf_8_decode # StandardCharsets.UTF_8
 
+3) Scanner init con text : String
+
 CobolPreprocessor 
-    CobolCommonEntriesMarker
+    CobolCommentEntriesMarker
         CobolDialect X
         CobolLine X
             CobolDialect X
             CobolPreprocessorTokens X
             CobolSourceFormatEnum X
             CobolLineTypeEnum X
+        CobolLineRewriter X base class per 
+            CobolCommentEntriesMarker X 
+            CobolInlineCommentEntriesNormalizer X 
+            CobolLineIndicatorProcessor X
+        CobolLineTypeEnum X
+        CobolPreprocessorTokens X
 
+    CobolDocumentParser
+        asg.params.CobolParserParams X
+            asg.params.CobolDialect X
+            CobolSourceFormatEnum X
+        asg.runner.ThrowingErrorListener X
+        preprocessor.CobolDocumentParserListener
 
-        CobolLineRewriter
-        CobolLineTypeEnum
-        CobolPreprocessorTokens
+            asg.params.CobolParserParams X
+            preprocessor.CobolDocumentContext 
+                asg.util.StringBuffer X
+                preprocessor.CobolReplacementMapping X
+                antlr4.CobolPreprocessorParser X 
+            asg.util.StringBuffer X
+            asg.util.Scanner X (nextLine() ....)
+        antlr4.CobolPreprocessorLexer
+        antlr4.CobolPreprocessorParser
+    CobolInlineCommentEntriesNormalizer X 
+    CobolLineIndicatorProcessor X
+
+    CobolLineReader X
+        preprocessor.CobolPreprocessorTokens X
+        preprocessor.CobolLineTypeEnum X
+        preprocessor.CobolSourceFormatEnum X
+        preprocessor.CobolLine X
+        asg.params.CobolParserParams X
+
+    CobolLineWriter X
+    CobolParserParams X
+    CobolLine X
+

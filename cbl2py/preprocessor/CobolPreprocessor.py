@@ -2,7 +2,6 @@ import typing
 from typing import TextIO
 
 from cbl2py.preprocessor.CobolCommentEntriesMarker import CobolCommentEntriesMarker
-
 from cbl2py.preprocessor.CobolDocumentParser import CobolDocumentParser
 from cbl2py.preprocessor.CobolInlineCommentEntriesNormalizer import CobolInlineCommentEntriesNormalizer
 from cbl2py.preprocessor.CobolLineIndicatorProcessor import CobolLineIndicatorProcessor

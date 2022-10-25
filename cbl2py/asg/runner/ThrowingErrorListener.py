@@ -1,6 +1,5 @@
-import antlr4.error.ErrorListener as ErrorListener
-
-class ThrowingErrorListener(): # ErrorListener
+import antlr4
+class ThrowingErrorListener(antlr4.error.ErrorListener.ErrorListener): # ErrorListener
 
     # import io.proleap.cobol.asg.exception.CobolParserException;
 	# @Override
@@ -9,5 +8,8 @@ class ThrowingErrorListener(): # ErrorListener
 	# 	throw new CobolParserException("syntax error in line " + line + ":" + charPositionInLine + " " + msg);
 	# }
 
-    def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
-        pass
+	def __init__(self):
+		super(antlr4.error.ErrorListener.ErrorListener, self).__init__()
+
+	def syntaxError(self, recognizer, offendingSymbol, line, column, msg, e):
+		pass

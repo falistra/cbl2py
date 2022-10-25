@@ -1,10 +1,11 @@
 
+from cairo import Extend
 from cbl2py.preprocessor.CobolPreprocessorTokens import CobolPreprocessorTokens
 from cbl2py.preprocessor.CobolLine import CobolLine
 from cbl2py.preprocessor.CobolLineTypeEnum import CobolLineTypeEnum
 from cbl2py.asg.util.StringBuffer import StringBuffer
 
-class CobolLineWriter:
+class CobolLineWriter :
 
     def serialize(self, lines: list[CobolLine]) -> str:
         sb : StringBuffer = StringBuffer()

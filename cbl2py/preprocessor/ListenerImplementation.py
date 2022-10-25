@@ -1,67 +1,59 @@
+from ast import Str
 from antlr4 import *
+import cbl2py
 
 
 from cbl2py.antlr4.CobolPreprocessorParser import CobolPreprocessorParser
 from cbl2py.antlr4.CobolPreprocessorListener import CobolPreprocessorListener
+from cbl2py.preprocessor.CobolPreprocessorTokens import CobolPreprocessorTokens
+from cbl2py.preprocessor.CobolDocumentContext import CobolDocumentContext
+from cbl2py.asg.util.StringBuffer import StringBuffer
+from cbl2py.asg.util.Scanner import Scanner
 
 class ListenerImplementation(CobolPreprocessorListener):
 
-    def __init__(self, *args, **kwargs):
-        self.params = kwargs["params"] # params
-        self.tokens = kwargs["tokens"] # tokens  
-        self.contexts = []
-        # self.contexts.append( CobolDocumentContext() )      
-        super().__init__()
+	def __init__(self, *args, **kwargs):
+		self.params = kwargs["params"] # params
+		self.tokens = kwargs["tokens"] # tokens  
+		self.contexts = []
+		self.contexts.append( CobolDocumentContext() )      
+		super(CobolPreprocessorListener, self).__init__()
 
-        # private final Stack<CobolDocumentContext> contexts = new Stack<CobolDocumentContext>();
-        # private final CobolParserParams params;
-        # private final BufferedTokenStream tokens;
+	def buildLines(self, text: str, linePrefix: str):
+		sb : StringBuffer = StringBuffer()
+		scanner : Scanner = Scanner(source=text)
 
-		# public CobolDocumentParserListenerImpl(final CobolParserParams params, final BufferedTokenStream tokens) {
-		# 	this.params = params;
-		# 	this.tokens = tokens;
+		firstLine : bool = True
+		line = scanner.next_line()
+		
+		while ( line ):
+			if not firstLine:
+				sb.append(CobolPreprocessorTokens.NEWLINE)
+			
+			trimmedLine : str = line.strip()
+			prefixedLine : str = linePrefix + CobolPreprocessorTokens.WS + trimmedLine
+			suffixedLine : str = prefixedLine.replace("(?i)(end-exec)", "$1 " + CobolPreprocessorTokens.EXEC_END_TAG)
 
-		# 	contexts.push(new CobolDocumentContext());
-		# }
+			sb.append(suffixedLine)
+			firstLine = False
+			line = scanner.next_line()
 
-	
-    def buildLines(self, text: str, linePrefix: str):
-        pass
-    # protected String buildLines(final String text, final String linePrefix) {
-	# 	final StringBuffer sb = new StringBuffer(text.length());
-	# 	final Scanner scanner = new Scanner(text);
-	# 	boolean firstLine = true;
+		return sb.toString()
 
-	# 	while (scanner.hasNextLine()) {
-	# 		if (!firstLine) {
-	# 			sb.append(CobolPreprocessor.NEWLINE);
-	# 		}
 
-	# 		final String line = scanner.nextLine();
-	# 		final String trimmedLine = line.trim();
-	# 		final String prefixedLine = linePrefix + CobolPreprocessor.WS + trimmedLine;
-	# 		final String suffixedLine = prefixedLine.replaceAll("(?i)(end-exec)",
-	# 				"$1 " + CobolPreprocessor.EXEC_END_TAG);
+# ===========================================================
+# ===========================================================
+# ===========================================================
+# ===========================================================
 
-	# 		sb.append(suffixedLine);
-	# 		firstLine = false;
-	# 	}
 
-	# 	scanner.close();
-	# 	return sb.toString();
-	# }
-        # sb = StringBuffer()
 
-    def context(self):
+	def context(self):
 	# @Override
 	# public CobolDocumentContext context() {
 	# 	return contexts.peek();
 	# }
-        return self.context[-1]
-
-
-
-
+		return self.context[-1]
 	# protected CobolWordCopyBookFinder createCobolWordCopyBookFinder() {
 	# 	return new CobolWordCopyBookFinderImpl();
 	# }
@@ -74,28 +66,28 @@ class ListenerImplementation(CobolPreprocessorListener):
 	# 	return new LiteralCopyBookFinderImpl();
 	# }
 
-    def enterCompilerOptions(self,ctx: CobolPreprocessorParser.CompilerOptionsContext ):
+	def enterCompilerOptions(self,ctx: CobolPreprocessorParser.CompilerOptionsContext ):
 	# @Override
 	# public void enterCompilerOptions(final CobolPreprocessorParser.CompilerOptionsContext ctx) {
 	# 	// push a new context for COMPILER OPTIONS terminals
 	# 	push();
 	# }
-        self.push()
+		self.push()
 
-    def enterCopyStatement(self,ctx: CobolPreprocessorParser.CopyStatementContext ):
+	def enterCopyStatement(self,ctx: CobolPreprocessorParser.CopyStatementContext ):
 	# @Override
 	# public void enterCopyStatement(final CobolPreprocessorParser.CopyStatementContext ctx) {
 	# 	// push a new context for COPY terminals
 	# 	push();
 	# }
-        self.push()
+		self.push()
 
-    def enterEjectStatement(self,ctx: CobolPreprocessorParser.EjectStatementContext ):
+	def enterEjectStatement(self,ctx: CobolPreprocessorParser.EjectStatementContext ):
 	# @Override
 	# public void enterEjectStatement(final CobolPreprocessorParser.EjectStatementContext ctx) {
 	# 	push();
 	# }
-        self.push()
+		self.push()
 
 	# @Override
 	# public void enterExecCicsStatement(final CobolPreprocessorParser.ExecCicsStatementContext ctx) {
@@ -332,23 +324,23 @@ class ListenerImplementation(CobolPreprocessorListener):
 	# }
 
 
-    def pop(self):
+	def pop(self):
 	# /**
 	#  * Pops the current preprocessing context from the stack.
 	#  */
 	# protected CobolDocumentContext pop() {
 	# 	return contexts.pop();
 	# }
-        return self.contexts.pop()
+		return self.contexts.pop()
 
-    def push(self):
+	def push(self):
 	# /**
 	#  * Pushes a new preprocessing context onto the stack.
 	#  */
 	# protected CobolDocumentContext push() {
 	# 	return contexts.push(new CobolDocumentContext());
 	# }
-        return self.contexts # .append(CobolDocumentContext())
+		return self.contexts # .append(CobolDocumentContext())
 
 	# @Override
 	# public void visitTerminal(final TerminalNode node) {
@@ -361,6 +353,6 @@ class ListenerImplementation(CobolPreprocessorListener):
 	# 	}
 	# }
 
-    def enterCopySource(self, ctx:CobolPreprocessorParser.CopySourceContext):
-        print('OK!')
+	def enterCopySource(self, ctx:CobolPreprocessorParser.CopySourceContext):
+		print('OK!')
 

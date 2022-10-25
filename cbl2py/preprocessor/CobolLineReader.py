@@ -12,9 +12,15 @@ class CobolLineReader:
 
     def processLines(self,lines : str , params : CobolParserParams) -> list:
         result = []
+
+        lastCobolLine : CobolLine = None
+
+
         for (lineNumber,currentLine) in enumerate(lines.splitlines()):
             currentCobolLine = self.parseLine(currentLine,lineNumber,params)
+            currentCobolLine.setPredecessor(lastCobolLine)
             result.append(currentCobolLine)
+            lastCobolLine = currentCobolLine
         return result
 
     def determineType(self,indicatorArea: str) -> CobolLineTypeEnum:
