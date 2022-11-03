@@ -12,3 +12,6 @@ class StringBuffer:
 
     def __str__(self):
         return self._file_str.getvalue()
+
+    def toString(self):
+        return self._file_str.getvalue()

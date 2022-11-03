@@ -76,7 +76,7 @@ class CobolCommentEntriesMarker(CobolLineRewriter):
         line : CobolLine
         for line in lines:
             processedLine : CobolLine = self.processLine(line)
-            result.add(processedLine)
+            result.append(processedLine)
         return result
 
 	# /**
@@ -130,7 +130,7 @@ class CobolCommentEntriesMarker(CobolLineRewriter):
         trigger : str
 
         for trigger in triggers: 
-            containsTrigger : bool = contentAreaUpperCase.strip().startsWith(trigger)
+            containsTrigger : bool = contentAreaUpperCase.strip().startswith(trigger)
 
             if (containsTrigger) :
                 result = True

@@ -36,21 +36,22 @@ class CobolPreprocessor:
         result = self.createDocumentParser().processLines(code, params)
         return result
  
-    @typing.overload
-    def process(self, cobolFile: TextIO, params : CobolParserParams) -> str:
-        cobolFileContent : str = cobolFile.toString()
-        result = self.process(cobolFileContent, params)
-        return result
+    # @typing.overload
+    # def process(self, cobolFile: TextIO, params : CobolParserParams) -> str:
+    #     cobolFileContent : str = cobolFile.toString()
+    #     result = self.process(cobolFileContent, params)
+    #     return result
 
-    @typing.overload
+    # @typing.overload
     def process(self, source: str, params) -> str:
         lines : list[CobolLine] = self.readLines(source, params)
         rewrittenLines : list[CobolLine] = self.rewriteLines(lines)
         result : str = self.parseDocument(rewrittenLines, params)
         return result
 
-    def readLines(self, cobolCode: str , params) -> list:
+    def readLines(self, cobolCode: str , params) -> list[CobolLine]:
         lines = self.createLineReader().processLines(cobolCode, params)
+        return lines
 
     def rewriteLines(self,lines: list) -> list:
         # /**

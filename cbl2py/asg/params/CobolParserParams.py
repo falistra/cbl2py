@@ -9,8 +9,8 @@ class CobolParserParams() :
         self.copyBookDirectories : list # list<File> 
         self.copyBookExtensions : list # list<String> 
         self.copyBookFiles : list # list<File> 
-        self.dialect: CobolDialect
-        self.format : CobolSourceFormatEnum
+        self.dialect: CobolDialect = CobolDialect.ANSI85
+        self.format : CobolSourceFormatEnum = CobolSourceFormatEnum(CobolSourceFormatEnum.FIXED, False)
         self.ignoreSyntaxErrors : bool 
 
     def getCharset(self) :

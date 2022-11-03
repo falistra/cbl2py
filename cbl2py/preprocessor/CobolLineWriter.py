@@ -1,5 +1,3 @@
-
-from cairo import Extend
 from cbl2py.preprocessor.CobolPreprocessorTokens import CobolPreprocessorTokens
 from cbl2py.preprocessor.CobolLine import CobolLine
 from cbl2py.preprocessor.CobolLineTypeEnum import CobolLineTypeEnum
@@ -12,7 +10,7 @@ class CobolLineWriter :
 
         line : CobolLine 
         for line in lines:
-            notContinuationLine : bool = not CobolLineTypeEnum.CONTINUATION.equals(line.getType())
+            notContinuationLine : bool = not (CobolLineTypeEnum.CONTINUATION == line.getType())
 
         if (notContinuationLine) :
             if (line.getNumber() > 0) :

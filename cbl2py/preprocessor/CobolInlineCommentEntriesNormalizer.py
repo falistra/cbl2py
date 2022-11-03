@@ -13,7 +13,7 @@ class CobolInlineCommentEntriesNormalizer(CobolLineRewriter):
 
 
     def processLine(self, line : CobolLine ) -> CobolLine:
-        matcher: typing.Match = self.pattern.match(line)
+        matcher: typing.Match = self.pattern.match(line.getContentArea())
         result: CobolLine
         if (not matcher):
             result = line
@@ -28,5 +28,5 @@ class CobolInlineCommentEntriesNormalizer(CobolLineRewriter):
         line : CobolLine
         for line in lines:
             processedLine : CobolLine = self.processLine(line)
-            result.add(processedLine)
+            result.append(processedLine)
         return result

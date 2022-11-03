@@ -11,7 +11,11 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
         return False if (line.getSuccessor() == None) else (CobolLineTypeEnum.CONTINUATION == (line.getSuccessor().getType()))
 
     def trimLeadingWhitespace(self, contentarea : str) -> str:
-        return contentarea.replaceAll("^\\s+", self.EMPTY_STRING)
+        return contentarea.replace("^\\s+", self.EMPTY_STRING)
+
+    def trimTrailingWhitespace(self, contentarea : str) -> str:
+        return contentarea.replace("\\s+$", self.EMPTY_STRING)
+
 
     def repairTrailingComma(self, contentArea : str) -> str:
 		
@@ -31,7 +35,7 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
         return result
 
     def rightTrimContentArea(self,contentarea : str) -> str:
-        contentAreaWithTrimmedTrailingWhitespace : str= self.trimTrailingWhitespace(contentarea)
+        contentAreaWithTrimmedTrailingWhitespace : str = self.trimTrailingWhitespace(contentarea)
         return self.repairTrailingComma(contentAreaWithTrimmedTrailingWhitespace)
 
     def removeStringLiterals(self,contentArea : str) -> str:
@@ -136,10 +140,11 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
         
         elif (lineType ==  CobolLineTypeEnum.COMMENT):
             result = CobolLine.copyCobolLineWithIndicatorAndContentArea(
-					CobolPreprocessorTokens.COMMENT_TAG + CobolPreprocessorTokens.WS, conditionalRightTrimmedContentArea, line)
+                        CobolPreprocessorTokens.COMMENT_TAG + CobolPreprocessorTokens.WS,
+                        conditionalRightTrimmedContentArea,line)
 
         elif (lineType ==  CobolLineTypeEnum.COMPILER_DIRECTIVE): 
-            result = CobolLine.copyCobolLineWithIndicatorAndContentArea(CobolPreprocessorTokens.WS, self.EMPTY_STRING, line);
+            result = CobolLine.copyCobolLineWithIndicatorAndContentArea(CobolPreprocessorTokens.WS, self.EMPTY_STRING, line)
 
         elif (lineType ==  CobolLineTypeEnum.NORMAL): 
             result = CobolLine.copyCobolLineWithIndicatorAndContentArea(CobolPreprocessorTokens.WS,
@@ -152,5 +157,5 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
         line : CobolLine
         for line in lines:
             processedLine : CobolLine = self.processLine(line)
-            result.add(processedLine)
+            result.append(processedLine)
         return result
