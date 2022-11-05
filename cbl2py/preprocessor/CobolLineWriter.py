@@ -12,13 +12,13 @@ class CobolLineWriter :
         for line in lines:
             notContinuationLine : bool = not (CobolLineTypeEnum.CONTINUATION == line.getType())
 
-        if (notContinuationLine) :
-            if (line.getNumber() > 0) :
-                sb.append(CobolPreprocessorTokens.NEWLINE)
+            if (notContinuationLine) :
+                if (line.getNumber() > 0) :
+                    sb.append(CobolPreprocessorTokens.NEWLINE)
 
-            sb.append(line.getBlankSequenceArea())
-            sb.append(line.getIndicatorArea())
+                sb.append(line.getBlankSequenceArea())
+                sb.append(line.getIndicatorArea())
 
-        sb.append(line.getContentArea())
+            sb.append(line.getContentArea())
 
         return sb.toString()

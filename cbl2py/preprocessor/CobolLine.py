@@ -7,11 +7,11 @@ class CobolLine():
 
     @classmethod
     def extractContentAreaA(cls, contentArea: str) :
-        return contentArea[0 : 4] if len(contentArea) > 4 else contentArea
+        return contentArea[0 : 4] if len(contentArea) < 4 else contentArea
 
     @classmethod
     def extractContentAreaB(cls, contentArea: str) :
-        return contentArea[0 : 4] if len(contentArea) > 4 else ""
+        return contentArea[0 : 4] if len(contentArea) < 4 else ""
 
     @classmethod
     def copyCobolLineWithContentArea(contentArea: str, line) :
@@ -35,7 +35,7 @@ class CobolLine():
 
     @classmethod
     def copyCobolLineWithIndicatorAndContentArea(cls, indicatorArea : str, contentArea: str, line):
-            return CobolLine(
+            cl = CobolLine(
                 line.sequenceArea, 
                 line.sequenceAreaOriginal, 
                 indicatorArea, 
@@ -52,6 +52,7 @@ class CobolLine():
                 line.type, 
                 line.predecessor, 
                 line.successor)
+            return cl
 
     @classmethod
     def copyCobolLineWithIndicatorArea(indicatorArea : str, contentArea: str, line):

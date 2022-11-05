@@ -146,10 +146,9 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
         elif (lineType ==  CobolLineTypeEnum.COMPILER_DIRECTIVE): 
             result = CobolLine.copyCobolLineWithIndicatorAndContentArea(CobolPreprocessorTokens.WS, self.EMPTY_STRING, line)
 
-        elif (lineType ==  CobolLineTypeEnum.NORMAL): 
+        elif (lineType ==  CobolLineTypeEnum.NORMAL):
             result = CobolLine.copyCobolLineWithIndicatorAndContentArea(CobolPreprocessorTokens.WS,
 					conditionalRightTrimmedContentArea, line)
-
         return result
 
     def processLines(self, lines : list[CobolLine]) -> list[CobolLine]:
