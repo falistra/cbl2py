@@ -2,7 +2,7 @@ from antlr4 import *
 
 from cbl2py.asg.params.CobolParserParams import CobolParserParams
 from cbl2py.asg.runner.ThrowingErrorListener import ThrowingErrorListener
-from cbl2py.preprocessor.CobolDocumentParserListener import CobolDocumentParserListener
+from cbl2py.preprocessor.document.CobolDocumentParserListener import CobolDocumentParserListener
 from cbl2py.antlr4.CobolPreprocessorLexer import CobolPreprocessorLexer
 from cbl2py.antlr4.CobolPreprocessorParser import CobolPreprocessorParser
 

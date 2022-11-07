@@ -5,7 +5,7 @@ from antlr4 import *
 from cbl2py.antlr4.CobolPreprocessorLexer import CobolPreprocessorLexer
 from cbl2py.antlr4.CobolPreprocessorParser import CobolPreprocessorParser
 
-from cbl2py.preprocessor.ListenerImplementation import ListenerImplementation
+from cbl2py.preprocessor.document.CobolDocumentParserListener import ListenerImplementation
 from cbl2py.preprocessor.CobolPreprocessor import CobolPreprocessor
 from cbl2py.asg.params.CobolParserParams import CobolParserParams
 
