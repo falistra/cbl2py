@@ -10,19 +10,18 @@ class CobolWordCopyBookFinder:
             for copyBookFile  in  params.getCopyBookFiles():
                 if (self.isMatchingCopyBook(copyBookFile, params, ctx)):
                     return copyBookFile
-
         if (params.getCopyBookDirectories()) :
             for copyBookDirectory in  params.getCopyBookDirectories() :
                 validCopyBook = self.findCopyBookInDirectory(copyBookDirectory, params, ctx)
-                if (validCopyBook) :
+                if (validCopyBook):
                     return validCopyBook
-
         return None
 
     def findCopyBookInDirectory(self, copyBooksDirectory, params : CobolParserParams , ctx : CobolPreprocessorParser.CobolWordContext):
         for copyBookCandidate in  os.listdir(copyBooksDirectory):
             if (self.isMatchingCopyBook(copyBookCandidate, params, ctx)):
-                return copyBookCandidate
+                return open(os.path.join(copyBooksDirectory,copyBookCandidate)).read()
+                # return copyBookCandidate
         return None
 
     def isMatchingCopyBook(self, copyBookCandidate, params : CobolParserParams, ctx : CobolPreprocessorParser.CobolWordContext):
@@ -50,5 +49,5 @@ class CobolWordCopyBookFinder:
 
     def isMatchingCopyBookWithoutExtension(self, copyBookCandidate, copyBookIdentifier : str):
 		# final String copyBookCandidateBaseName = FilenameUtils.getBaseName(copyBookCandidate.getName());
-        copyBookCandidateBaseName = os.path.basename(copyBookCandidate.getName())
+        copyBookCandidateBaseName = os.path.basename(copyBookCandidate) # .getName())
         return copyBookCandidateBaseName.casefold() == copyBookIdentifier.casefold()

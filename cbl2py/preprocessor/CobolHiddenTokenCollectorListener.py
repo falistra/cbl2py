@@ -4,8 +4,9 @@ from antlr4 import TerminalNode
 from cbl2py.asg.util.StringBuffer import StringBuffer
 
 from cbl2py.preprocessor.TokenUtils import TokenUtils
+from cbl2py.antlr4.CobolPreprocessorListener import CobolPreprocessorListener
 
-class CobolHiddenTokenCollectorListener:
+class CobolHiddenTokenCollectorListener(CobolPreprocessorListener):
 
     def __init__(self, tokens : BufferedTokenStream):
         self.firstTerminal : bool = True

@@ -6,12 +6,12 @@ class CobolParserParams() :
 
     def __init__(self):
         self.charset = 'utf-8' # codecs.utf_8_decode # StandardCharsets.UTF_8
-        self.copyBookDirectories : list # list<File> 
-        self.copyBookExtensions : list # list<String> 
-        self.copyBookFiles : list # list<File> 
+        self.copyBookDirectories : list = [] # list<File> 
+        self.copyBookExtensions : list = [] # list<String> 
+        self.copyBookFiles : list = [] # list<File> 
         self.dialect: CobolDialect = CobolDialect.ANSI85
         self.format : CobolSourceFormatEnum = CobolSourceFormatEnum(CobolSourceFormatEnum.FIXED, False)
-        self.ignoreSyntaxErrors : bool 
+        self.ignoreSyntaxErrors : bool = True
 
     def getCharset(self) :
         return self.charset
