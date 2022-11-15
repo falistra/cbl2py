@@ -19,12 +19,18 @@ class CobolDocumentContext:
 
     def replaceReplaceablesByReplacements(self, tokens:  BufferedTokenStream ) -> None :
         if not (self.currentReplaceableReplacements == None):
-            self.currentReplaceableReplacements.sort()
+            # TODO LIST
+            # self.currentReplaceableReplacements.sort()
 
             for replaceableReplacement in self.currentReplaceableReplacements :
                 currentOutput : str = self.outputBuffer.toString()
-                replacedOutput = replaceableReplacement.replace(currentOutput, tokens)
-
+                
+                # TODO !!!!
+                # replacedOutput = replaceableReplacement.replace(currentOutput, tokens)
+                replacedOutput = ""
+                
+                
+                
                 self.outputBuffer =  StringBuffer()
                 self.outputBuffer.append(replacedOutput)
 
@@ -32,7 +38,6 @@ class CobolDocumentContext:
         if (replaceClauses == None):
             self.currentReplaceableReplacements = None
         else:
-            length : int = len(self.replaceClauses)
             self.currentReplaceableReplacements = []
 
             for  replaceClause in replaceClauses :

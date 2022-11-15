@@ -27,7 +27,7 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
         self.params : CobolParserParams = kwargs["params"] # params
         self.tokens : BufferedTokenStream = kwargs["tokens"] # tokens  
         self.contexts : list[CobolDocumentContext] = []
-        self.contexts.push( CobolDocumentContext() )      
+        self.push()      
         super(CobolPreprocessorListener, self).__init__()
 
     def buildLines(self, text: str, linePrefix: str):
@@ -62,7 +62,6 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
     #     return sb.toString()
 
     def context(self) -> CobolDocumentContext:
-        print(f"len(self.contexts): {len(self.contexts)}")
         if self.contexts:
                 return self.contexts[-1]    # this will get the last element of stack
         else:
@@ -131,8 +130,9 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
         # 		context().storeReplaceablesAndReplacements(replacingPhrase.replaceClause());
         # 	}
 
-        replacingPhrase : CobolPreprocessorParser.ReplacingPhraseContext = ctx.replacingPhrase()
-        while ( replacingPhrase ):
+        replacingPhraseList : CobolPreprocessorParser.ReplacingPhraseContext = ctx.replacingPhrase()
+        # while ( replacingPhrase ):
+        for replacingPhrase in replacingPhraseList: 
             self.context().storeReplaceablesAndReplacements(replacingPhrase.replaceClause())
             replacingPhrase = ctx.replacingPhrase()
 
@@ -263,7 +263,6 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
                 result += CobolPreprocessor().process(copyBook, params)
                 result += f"\n      *>      ===PREPROCESSOR==>COPY {copySource.getText()} END\n"
             except Exception as e:
-                print("ERRORE!!")
                 result = None
                 # LOG.warn(e.getMessage());
         return result
@@ -279,7 +278,7 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
         # /**
         #  * Pushes a new preprocessing context onto the stack.
         #  */
-        return self.contexts.push(CobolDocumentContext())
+        return self.contexts.append(CobolDocumentContext())
 
     def visitTerminal(self, node: TerminalNode) :
         tokPos : int  = node.getSourceInterval()[0] # .a

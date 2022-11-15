@@ -1,53 +1,26 @@
-1) type enum in java
+0) Errore in self.currentReplaceableReplacements.sort()
+File "/home/fausto/cbl2py/cbl2py/preprocessor/document/CobolDocumentContext.py", line 22, in replaceReplaceablesByReplacements
+    self.currentReplaceableReplacements.sort()
+
+TypeError: '<' not supported between instances of 'CobolReplacementMapping' and 'CobolReplacementMapping'
+
+1) 
+File "/home/fausto/cbl2py/cbl2py/preprocessor/document/CobolDocumentContext.py", line 27, in replaceReplaceablesByReplacements
+    replacedOutput = replaceableReplacement.replace(currentOutput, tokens)
+
+AttributeError: 'CobolReplacementMapping' object has no attribute 'replace'
+
+line 2097:7 extraneous input 'S-SET-1-EX' expecting {ACCEPT, ADD, ALTER, CALL, CANCEL, CLOSE, COMPUTE, CONTINUE, DELETE, DISABLE, DISPLAY, DIVIDE, ENABLE, ENTRY, EVALUATE, EXHIBIT, EXIT, GENERATE, GOBACK, GO, IF, INITIALIZE, INITIATE, INSPECT, MERGE, MOVE, MULTIPLY, NEXT, OPEN, PERFORM, PURGE, READ, RECEIVE, RELEASE, RETURN, REWRITE, SEARCH, SEND, SET, SORT, START, STOP, STRING, SUBTRACT, TERMINATE, UNSTRING, WRITE, DOT_FS, EXECCICSLINE, EXECSQLIMSLINE, EXECSQLLINE}
+line 2126:7 extraneous input 'S-SET-3-EX' expecting DOT_FS
+line 2944:15 no viable alternative at input 'TG \n               INTO'
+line 4023:47 no viable alternative at input 'PROGRESSIVO-SESSIONE-STR INTO'
+
+2) Rivedere CobolLineIndicatorProcessor.py
+
+
+line 6233:7 extraneous input 'S-SET-1-EX'
+
+3) type enum in java
 cbl2py/preprocessor/CobolPreprocessor.py : CobolSourceFormatEnum
 
-2) cbl2py/asg/params/CobolParserParams.py
-charset = codecs.utf_8_decode # StandardCharsets.UTF_8
-
-3) Scanner init con text : String
-
-CobolPreprocessor 
-    CobolCommentEntriesMarker
-        CobolDialect X
-        CobolLine X
-            CobolDialect X
-            CobolPreprocessorTokens X
-            CobolSourceFormatEnum X
-            CobolLineTypeEnum X
-        CobolLineRewriter X base class per 
-            CobolCommentEntriesMarker X 
-            CobolInlineCommentEntriesNormalizer X 
-            CobolLineIndicatorProcessor X
-        CobolLineTypeEnum X
-        CobolPreprocessorTokens X
-
-    CobolDocumentParser
-        asg.params.CobolParserParams X
-            asg.params.CobolDialect X
-            CobolSourceFormatEnum X
-        asg.runner.ThrowingErrorListener X
-        preprocessor.CobolDocumentParserListener
-
-            asg.params.CobolParserParams X
-            preprocessor.CobolDocumentContext 
-                asg.util.StringBuffer X
-                preprocessor.CobolReplacementMapping X
-                antlr4.CobolPreprocessorParser X 
-            asg.util.StringBuffer X
-            asg.util.Scanner X (nextLine() ....)
-        antlr4.CobolPreprocessorLexer
-        antlr4.CobolPreprocessorParser
-    CobolInlineCommentEntriesNormalizer X 
-    CobolLineIndicatorProcessor X
-
-    CobolLineReader X
-        preprocessor.CobolPreprocessorTokens X
-        preprocessor.CobolLineTypeEnum X
-        preprocessor.CobolSourceFormatEnum X
-        preprocessor.CobolLine X
-        asg.params.CobolParserParams X
-
-    CobolLineWriter X
-    CobolParserParams X
-    CobolLine X
 

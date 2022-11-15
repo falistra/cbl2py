@@ -77,8 +77,8 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
             if (conditionalRightTrimmedContentArea == None) or (conditionalRightTrimmedContentArea == "") :
                 result = CobolLine.copyCobolLineWithIndicatorAndContentArea(CobolPreprocessorTokens.WS, self.EMPTY_STRING, line)
             else:
-                if (line.getPredecessor() != None) and (line.getPredecessor().getContentAreaOriginal().endsWith("\"") \
-                    or line.getPredecessor().getContentAreaOriginal().endsWith("'")):
+                if (line.getPredecessor() != None) and (line.getPredecessor().getContentAreaOriginal().endswith("\"") \
+                    or line.getPredecessor().getContentAreaOriginal().endswith("'")):
 
                     trimmedContentArea = self.trimLeadingWhitespace(conditionalRightTrimmedContentArea)
 
@@ -87,7 +87,7 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
                     #  * quotation marks.
                     #  */                    
 
-                    if (trimmedContentArea.startsWith("\"") or trimmedContentArea.startsWith("'")):
+                    if (trimmedContentArea.startswith("\"") or trimmedContentArea.startswith("'")):
                         # /**
                         # * We have to remove the first quotation mark of the continuation line, the 1
                         # * quotation mark from the continued line and the 2 quotations marks from the
@@ -111,7 +111,7 @@ class CobolLineIndicatorProcessor(CobolLineRewriter):
                         #  * ... the continuation line might start with a single quotation mark. This
                         #  * indicates, that the literal from the continued line stays open ...
                         #  */
-                        if (self.trimmedContentArea.startsWith("\"") and self.trimmedContentArea.startsWith("'")) :
+                        if (trimmedContentArea.startswith("\"") or trimmedContentArea.startswith("'")) :
                             # /**
                             #  * so we are removing the leading quotation mark to keep the literal open.
                             #  */

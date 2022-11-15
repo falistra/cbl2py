@@ -1,5 +1,6 @@
-FILE_TEST_NAME = "./tests/cobol/HelloWorld.cbl" # './tests/cobol/ASSSVSRT.cbl'
-FILE_OUT_PY = "./tests/python/HelloWorld.py" # './tests/cobol/ASSSVSRT.cbl'
+FILE_TEST_NAME = "./tests/cobol/READVE3.cbl" # './tests/cobol/ASSSVSRT.cbl'
+# FILE_TEST_NAME = "./tests/cobol/HelloWorld.cbl" # './tests/cobol/ASSSVSRT.cbl'
+FILE_OUT_PY = "./tests/python/READVE3.py" # './tests/cobol/ASSSVSRT.cbl'
 COBOL_COPY_DIR = "./tests/cobol/cpy"
 
 # from antlr4 import *
@@ -32,6 +33,7 @@ COBOL_COPY_DIR = "./tests/cobol/cpy"
 
 
 from cbl2py.main import Main
+import logging
     
 def Ztest_main():
     Main(FILE_TEST_NAME,FILE_TEST_NAME,FILE_OUT_PY)
@@ -40,6 +42,8 @@ from cbl2py.preprocessor.CobolPreprocessor import CobolPreprocessor
 from cbl2py.asg.params.CobolParserParams import CobolParserParams
 
 def test_preprocessor():
+    logging.debug("======TEST PREPROCESSOR======")
+        
     with open(FILE_TEST_NAME, encoding='utf8') as cobolCodeFile:
         cobolCode : str = cobolCodeFile.read()    
         cobolPreprocessor= CobolPreprocessor()
