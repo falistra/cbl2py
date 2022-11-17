@@ -1,6 +1,6 @@
-FILE_TEST_NAME = "./tests/cobol/READVE3.cbl" # './tests/cobol/ASSSVSRT.cbl'
+FILE_TEST_NAME = "./tests/cobol/HelloWorld.cbl" # './tests/cobol/ASSSVSRT.cbl'
 # FILE_TEST_NAME = "./tests/cobol/HelloWorld.cbl" # './tests/cobol/ASSSVSRT.cbl'
-FILE_OUT_PY = "./tests/python/READVE3.py" # './tests/cobol/ASSSVSRT.cbl'
+FILE_OUT_PY = "./tests/python/HelloWorld.cbl" # './tests/cobol/ASSSVSRT.cbl'
 COBOL_COPY_DIR = "./tests/cobol/cpy"
 
 # from antlr4 import *

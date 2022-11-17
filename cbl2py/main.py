@@ -4,9 +4,9 @@ import cbl2py.LoggingConfig
 from cbl2py.transpiler.Main import Main
 
 def driver(
-  cobolfilename: str = typer.Option("./tests/cobol/READVE3.cbl", prompt=False),
+  cobolfilename: str = typer.Option("./tests/cobol/ASSSVSRT.cbl", prompt=False),
   copybookdirectory: str = typer.Option('./tests/cobol/cpy', prompt=False),
-  pythonfilename: str = typer.Option('./tests/python/READVE3.py', prompt=False),
+  pythonfilename: str = typer.Option('./tests/python/ASSSVSRT.py', prompt=False),
   loglevel: str = typer.Option('debug', prompt=False),
   outpreprocessorfile: bool = typer.Option(False, prompt=False),
 ):
