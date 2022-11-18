@@ -41,7 +41,7 @@ def Ztest_main():
 from cbl2py.preprocessor.CobolPreprocessor import CobolPreprocessor
 from cbl2py.asg.params.CobolParserParams import CobolParserParams
 
-def test_preprocessor():
+def Ztest_preprocessor():
     logging.debug("======TEST PREPROCESSOR======")
         
     with open(FILE_TEST_NAME, encoding='utf8') as cobolCodeFile:
