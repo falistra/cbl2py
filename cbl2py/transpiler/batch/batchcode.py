@@ -1,14 +1,12 @@
 from cbl2py.antlr4.CobolListener import CobolListener
 from cbl2py.antlr4.CobolParser import CobolParser
-from cbl2py.transpiler.listerners.utilities import normalize_ident as norm
+from cbl2py.transpiler.batch.utilities import normalize_ident as norm
+from cbl2py.transpiler.batch.data import XData
 
 class Batch(CobolListener):
     def __init__(self, *args, **kwargs):
         self.outPythonFileName = kwargs["pythonfilename"] # params
         self.outPythonFile = open(self.outPythonFileName,'w')
-        self.outPythonFile.write(f"""
-from cbl2py.transpiler.data.types import Variable        
-        """)  
         super(CobolListener, self).__init__()
 
     # Enter a parse tree produced by CobolParser#startRule.
@@ -16,12 +14,7 @@ from cbl2py.transpiler.data.types import Variable
         self.indent = 0
         self.tab = '    '
         self.functions = {}
-        code = f"""
-class Program():
-        """
-        self.outPythonFile.write(code)
-
-
+        self.data = []
 
     # Enter a parse tree produced by CobolParser#programIdParagraph.
     def enterProgramIdParagraph(self, ctx:CobolParser.ProgramIdParagraphContext):
@@ -34,19 +27,8 @@ class Program():
 
     # Enter a parse tree produced by CobolParser#dataDescriptionEntryFormat1.
     def enterDataDescriptionEntryFormat1(self, ctx:CobolParser.DataDescriptionEntryFormat1Context):
-        print(dir(ctx))
-        if ctx.INTEGERLITERAL:
-            level = ctx.INTEGERLITERAL
-        elif ctx.LEVEL_NUMBER_77:
-            level = ctx.LEVEL_NUMBER_77
-        else:
-            level = None
-        print(level)
-        if ctx.dataName:
-            name = ctx.dataName()
-        else:
-            name = None
-        print(name)
+        self.data.append(XData(ctx))
+
 
     # Enter a parse tree produced by CobolParser#performProcedureStatement.
     def enterPerformProcedureStatement(self, ctx:CobolParser.PerformProcedureStatementContext):
@@ -105,6 +87,14 @@ class Program():
     # Exit a parse tree produced by CobolParser#startRule.
     def exitStartRule(self, ctx:CobolParser.StartRuleContext):
         indent = f'\n{self.indent*self.tab}'
+        codeData = [f"self.{v.name} = {v.value}\n" for v in self.data]  
+        code = f"""
+class Program():
+    def __init__(self):
+        {f"{2*self.tab}".join(codeData)}
+        """
+        self.outPythonFile.write(code)
+
         for function in self.functions:
             bodylines = self.functions[function]['body']
             bodylines = [f'{(self.indent+1)*self.tab}'+line for line in  bodylines]

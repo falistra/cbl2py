@@ -1,5 +1,7 @@
 
 class Program():
+    def __init__(self):
+        
         
     def HELLOWRD(self):	# Linea Source Cobol: non definita
         print("SIMPLE HELLO WORLD")

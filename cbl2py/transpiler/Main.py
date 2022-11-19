@@ -5,7 +5,7 @@ from cbl2py.asg.params.CobolParserParams import CobolParserParams
 from cbl2py.antlr4.CobolLexer import CobolLexer
 from cbl2py.antlr4.CobolParser import CobolParser
 # from cbl2py.transpiler.listerners.interpreter import Interpreter
-from cbl2py.transpiler.listerners.batchcode import Batch
+from cbl2py.transpiler.batch.batchcode import Batch
 
 def Main(cobolfilename,copybookdirectory,pythonfilename,outPreprocessoFile=None):
     with open(cobolfilename, encoding='utf8') as cobolCodeFile:

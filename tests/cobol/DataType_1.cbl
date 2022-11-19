@@ -8,8 +8,10 @@
           01 WS-NUM3 PIC S9(3)V9(2) VALUE -123.45.
           01 WS-NAME PIC A(6) VALUE 'ABCDEF'.
           01 WS-ID PIC X(5) VALUE 'A121$'.
+          01 PROV-C-VET PIC X(10) VALUE SPACES.
        
        PROCEDURE DIVISION.
+          DISPLAY PROV-C-VET.
           DISPLAY "WS-NUM1 : "WS-NUM1.
           DISPLAY "WS-NUM2 : "WS-NUM2.
           DISPLAY "WS-NUM3 : "WS-NUM3.
