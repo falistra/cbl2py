@@ -1,0 +1,14 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO.
+       
+       DATA DIVISION.
+          WORKING-STORAGE SECTION.
+          01 WS-NUM1 PIC 99V9 VALUE IS 3.5.
+          01 WS-NAME PIC A(6) VALUE 'ABCD'.
+          01 WS-ID PIC 99 VALUE ZERO.
+       
+       PROCEDURE DIVISION.
+          DISPLAY "WS-NUM1 : "WS-NUM1.
+          DISPLAY "WS-NAME : "WS-NAME.
+          DISPLAY "WS-ID   : "WS-ID.
+       STOP RUN.
