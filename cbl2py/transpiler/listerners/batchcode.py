@@ -5,11 +5,14 @@ from cbl2py.transpiler.listerners.utilities import normalize_ident as norm
 class Batch(CobolListener):
     def __init__(self, *args, **kwargs):
         self.outPythonFileName = kwargs["pythonfilename"] # params
+        self.outPythonFile = open(self.outPythonFileName,'w')
+        self.outPythonFile.write(f"""
+from cbl2py.transpiler.data.types import Variable        
+        """)  
         super(CobolListener, self).__init__()
 
     # Enter a parse tree produced by CobolParser#startRule.
     def enterStartRule(self, ctx:CobolParser.StartRuleContext):
-        self.outPythonFile = open(self.outPythonFileName,'w')
         self.indent = 0
         self.tab = '    '
         self.functions = {}
@@ -28,6 +31,22 @@ class Program():
         self.functions[self.currentFunction] = {
             "body" : []
         }
+
+    # Enter a parse tree produced by CobolParser#dataDescriptionEntryFormat1.
+    def enterDataDescriptionEntryFormat1(self, ctx:CobolParser.DataDescriptionEntryFormat1Context):
+        print(dir(ctx))
+        if ctx.INTEGERLITERAL:
+            level = ctx.INTEGERLITERAL
+        elif ctx.LEVEL_NUMBER_77:
+            level = ctx.LEVEL_NUMBER_77
+        else:
+            level = None
+        print(level)
+        if ctx.dataName:
+            name = ctx.dataName()
+        else:
+            name = None
+        print(name)
 
     # Enter a parse tree produced by CobolParser#performProcedureStatement.
     def enterPerformProcedureStatement(self, ctx:CobolParser.PerformProcedureStatementContext):
@@ -66,6 +85,7 @@ class Program():
             code = []
             for id in to_ids:
                 to_id = norm(id.getText())
+                value = "None"
                 if (moveToSendingArea.identifier()):
                     value = f"self.{norm(moveToSendingArea.getText())}"
                 elif (moveToSendingArea.literal()):
