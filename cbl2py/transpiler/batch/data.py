@@ -1,12 +1,16 @@
 from cbl2py.antlr4.CobolParser import CobolParser
 from cbl2py.transpiler.batch.utilities import normalize_ident as norm
 
+import logging
+LOG = logging.getLogger()
+
 class Variable():
     def __init__(self,level,name,picture,value):
         self.level = level
         self.name = name
         self.picture = picture
         self.value = value
+        self.children = []
 
 def XData(ctx:CobolParser.DataDescriptionEntryFormat1Context):
     lunghezza = None
@@ -30,6 +34,8 @@ def XData(ctx:CobolParser.DataDescriptionEntryFormat1Context):
                                 fc = vci.dataValueIntervalFrom().literal().figurativeConstant().getText()
                                 if (fc == "SPACES"):
                                     value = f'" "*{lunghezza}'
+                                elif (fc == "ZERO"):
+                                    value = '0'
                             else:
                                 value = vci.dataValueIntervalFrom().literal().getText()
 

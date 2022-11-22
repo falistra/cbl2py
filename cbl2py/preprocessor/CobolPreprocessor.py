@@ -1,5 +1,9 @@
 import typing
 
+import logging
+LOG = logging.getLogger()
+
+
 from antlr4 import *
 
 
@@ -117,6 +121,9 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
         self.pop()
 
     def exitCopyStatement(self,ctx: CobolPreprocessorParser.CopyStatementContext):
+
+        LOG.debug(f">line: {ctx.start.line}> COPY {ctx.copySource().getText()}")
+
         # throw away COPY terminals
         self.pop();
 

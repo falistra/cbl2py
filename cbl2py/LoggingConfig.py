@@ -1,16 +1,21 @@
-import logging
 from logging import config
 
 log_config = {
     "version":1,
     "root":{
-        "handlers" : ["console"],
+        "handlers" : ["file"],
         "level": "DEBUG"
     },
     "handlers":{
         "console":{
             "formatter": "short std_out",
             "class": "logging.StreamHandler",
+            "level": "DEBUG"
+        },
+        "file":{
+            "formatter": "short std_out",
+            "class": "logging.StreamHandler",
+            'stream': open('./tests/tests.log','w'),
             "level": "DEBUG"
         }
     },

@@ -3,6 +3,9 @@ from cbl2py.antlr4.CobolParser import CobolParser
 from cbl2py.transpiler.batch.utilities import normalize_ident as norm
 from cbl2py.transpiler.batch.data import XData
 
+import logging
+LOG = logging.getLogger()
+
 class Batch(CobolListener):
     def __init__(self, *args, **kwargs):
         self.outPythonFileName = kwargs["pythonfilename"] # params
