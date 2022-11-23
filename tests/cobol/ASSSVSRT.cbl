@@ -108,9 +108,8 @@
                                              
 006200 SPECIAL-NAMES.  DECIMAL-POINT IS COMMA.             
       *ESTETA* 
-      *ZANASI
-      * REPOSITORY.
-      *      FUNCTION idxtg
+      *REPOSITORY.
+      *     FUNCTION idxtg
       *      FUNCTION tgxid.                     
       *                                                                         
 006300 INPUT-OUTPUT SECTION.                                                    

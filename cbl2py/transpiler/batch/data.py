@@ -46,7 +46,11 @@ def XData(ctx:CobolParser.DataDescriptionEntryFormat1Context):
     else:
         level = None
     if level:
-        level = int(level().getText())
+        try:
+            level = int(level().getText())
+        except:
+            pass 
+
     if ctx.dataName:
         name = ctx.dataName()
     else:
