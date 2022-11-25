@@ -160,7 +160,7 @@ execCicsStatement
 // exec sql statement
 
 execSqlStatement
-   : EXEC SQL charDataSql END_EXEC DOT?
+   : EXEC SQL (includeSource | charDataSql) END_EXEC DOT?
    ;
 
 // exec sql ims statement
@@ -169,6 +169,9 @@ execSqlImsStatement
    : EXEC SQLIMS charData END_EXEC DOT?
    ;
 
+includeSource 
+   : INCLUDE copySource  
+   ;
 // copy statement
 
 copyStatement
@@ -397,6 +400,7 @@ GDS : G D S;
 GRAPHIC : G R A P H I C;
 HOOK : H O O K;
 IN : I N;
+INCLUDE : I N C L U D E;
 INTDATE : I N T D A T E;
 JA : J A;
 JP : J P;

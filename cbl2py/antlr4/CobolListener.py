@@ -2447,6 +2447,15 @@ class CobolListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CobolParser#execSQL.
+    def enterExecSQL(self, ctx:CobolParser.ExecSQLContext):
+        pass
+
+    # Exit a parse tree produced by CobolParser#execSQL.
+    def exitExecSQL(self, ctx:CobolParser.ExecSQLContext):
+        pass
+
+
     # Enter a parse tree produced by CobolParser#acceptStatement.
     def enterAcceptStatement(self, ctx:CobolParser.AcceptStatementContext):
         pass

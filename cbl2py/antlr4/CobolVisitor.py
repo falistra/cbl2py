@@ -1364,6 +1364,11 @@ class CobolVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CobolParser#execSQL.
+    def visitExecSQL(self, ctx:CobolParser.ExecSQLContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CobolParser#acceptStatement.
     def visitAcceptStatement(self, ctx:CobolParser.AcceptStatementContext):
         return self.visitChildren(ctx)

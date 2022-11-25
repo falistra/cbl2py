@@ -1,11 +1,8 @@
 import typing
-
 import logging
 LOG = logging.getLogger()
 
-
 from antlr4 import *
-
 
 from antlr4.BufferedTokenStream import BufferedTokenStream
 
@@ -31,6 +28,7 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
         self.params : CobolParserParams = kwargs["params"] # params
         self.tokens : BufferedTokenStream = kwargs["tokens"] # tokens  
         self.contexts : list[CobolDocumentContext] = []
+        self.sqlVars : int = 0
         self.push()      
         super(CobolPreprocessorListener, self).__init__()
 
@@ -120,36 +118,20 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
     def exitCompilerOptions(self,ctx: CobolPreprocessorParser.CompilerOptionsContext):
         self.pop()
 
+
     def exitCopyStatement(self,ctx: CobolPreprocessorParser.CopyStatementContext):
-
-        LOG.debug(f">line: {ctx.start.line}> COPY {ctx.copySource().getText()}")
-
-        # throw away COPY terminals
-        self.pop();
-
-        # a new context for the copy book content
-        self.push();
-
-        # 	/*
-        # 	 * replacement phrase
-        # 	 */
-        # 	for (final ReplacingPhraseContext replacingPhrase : ctx.replacingPhrase()) {
-        # 		context().storeReplaceablesAndReplacements(replacingPhrase.replaceClause());
-        # 	}
+        self.pop()
+        self.push()
 
         replacingPhraseList : CobolPreprocessorParser.ReplacingPhraseContext = ctx.replacingPhrase()
-        # while ( replacingPhrase ):
         for replacingPhrase in replacingPhraseList: 
             self.context().storeReplaceablesAndReplacements(replacingPhrase.replaceClause())
             replacingPhrase = ctx.replacingPhrase()
-
         # 	/*
         # 	 * copy the copy book
         # 	 */
-
         copySource : CobolPreprocessorParser.CopySourceContext = ctx.copySource()
         copyBookContent : str = self.getCopyBookContent(copySource, self.params)
-
         if (copyBookContent) :
             self.context().write(copyBookContent + CobolPreprocessorTokens.NEWLINE)
             self.context().replaceReplaceablesByReplacements(self.tokens)
@@ -184,38 +166,51 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
     def exitExecSqlImsStatement(self, ctx: CobolPreprocessorParser.ExecSqlImsStatementContext):
         # throw away EXEC SQLIMS terminals
         self.pop()
-
         # a new context for the SQLIMS statement
         self.push()
-        
-        # 		/*
-        # 		 * text
-        # 		 */
-
         text : str = TokenUtils.getTextIncludingHiddenTokens(ctx, self.tokens)
         linePrefix : str = CobolLine.createBlankSequenceArea(self.params.getFormat()) + CobolPreprocessorTokens.EXEC_SQLIMS_TAG;
         lines : str = self.buildLines(text, linePrefix)
-
         self.context().write(lines)
         content : str = self.context().read()
         self.pop()
         self.context().write(content)
 
     def exitExecSqlStatement(self, ctx : CobolPreprocessorParser.ExecSqlStatementContext) :
-        # throw away EXEC SQL terminals
         self.pop()
 
-        # a new context for the SQL statement
-        self.push()
+        if (ctx.includeSource()):
+            self.push();
+            copySource : CobolPreprocessorParser.CopySourceContext = ctx.includeSource().copySource()
+            copyBookContent : str = self.getCopyBookContent(copySource, self.params)
+            if (copyBookContent) :
+                self.context().write(copyBookContent + CobolPreprocessorTokens.NEWLINE)
+                self.context().replaceReplaceablesByReplacements(self.tokens)
 
-        text : str = TokenUtils.getTextIncludingHiddenTokens(ctx, self.tokens)
-        linePrefix : str = CobolLine.createBlankSequenceArea(self.params.getFormat()) + CobolPreprocessorTokens.EXEC_SQL_TAG
-        lines : str  = self.buildLines(text, linePrefix)
+            content : str = self.context().read()
+            self.pop()
+            self.context().write(content)
 
-        self.context().write(lines)
-        content = self.context().read()
-        self.pop()
-        self.context().write(content)
+        if (ctx.charDataSql()):
+            # a new context for the SQL statement
+            self.push()
+            text : str = TokenUtils.getTextIncludingHiddenTokens(ctx, self.tokens)
+            sql = text # ctx.charDataSql().getText()
+            sql = sql.replace("EXEC SQL","").replace("END-EXEC","")
+            textPython = f"""
+SQL{self.sqlVars} = \"\"\"
+{sql}            
+\"\"\"\n\n
+            """
+            self.params.getPythonSQLfile().write(textPython)
+            text = f"          EXECSQL SQL{self.sqlVars}"
+#            linePrefix : str = CobolLine.createBlankSequenceArea(self.params.getFormat()) + CobolPreprocessorTokens.EXEC_SQL_TAG
+#            lines : str  = self.buildLines(text, linePrefix)
+
+            self.context().write(text) # (lines)
+            content = self.context().read()
+            self.pop()
+            self.context().write(content)
 
     def exitReplaceArea(self, ctx: CobolPreprocessorParser.ReplaceAreaContext):
         # 	/*
@@ -241,7 +236,6 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
     def exitTitleStatement(self, ctx: CobolPreprocessorParser.TitleStatementContext) :
         self.pop()
 
-
     def findCopyBook(self, copySource : CobolPreprocessorParser.CopySourceContext, params : CobolParserParams ) :
         result : typing.IO
         if (copySource.cobolWord()) :
@@ -251,7 +245,7 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
         elif (copySource.filename()) :
             result = self.createFilenameCopyBookFinder().findCopyBook(params, copySource.filename())
         else:
-            # LOG.warn("unknown copy book reference type {}", copySource);
+            LOG.warn("unknown INCLUDE reference type {}", copySource);
             result = None
         return result
 
@@ -271,7 +265,7 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
                 result += f"\n      *>      ===PREPROCESSOR==>COPY {copySource.getText()} END\n"
             except Exception as e:
                 result = None
-                # LOG.warn(e.getMessage());
+                LOG.warn(e.getMessage());
         return result
 
 

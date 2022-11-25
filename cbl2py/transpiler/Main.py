@@ -7,11 +7,16 @@ from cbl2py.antlr4.CobolParser import CobolParser
 # from cbl2py.transpiler.listerners.interpreter import Interpreter
 from cbl2py.transpiler.batch.batchcode import Batch
 
+import os
+
 def Main(cobolfilename,copybookdirectory,pythonfilename,outPreprocessoFile=None):
     with open(cobolfilename, encoding='utf8') as cobolCodeFile:
         cobolCode : str = cobolCodeFile.read()    
         cobolPreprocessor= CobolPreprocessor()
+        pythonSQLfile, _ = os.path.splitext(pythonfilename)
+        pythonSQLfile = open(f"{pythonSQLfile}_sql.py",'w')
         params = CobolParserParams()
+        params.setPythonSQLfile(pythonSQLfile)
         params.setCopyBookDirectories([copybookdirectory])
         outPreProcessor : str = cobolPreprocessor.process(cobolCode,params)
         if (outPreprocessoFile):

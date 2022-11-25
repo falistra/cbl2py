@@ -29,9 +29,44 @@
         05 BARUNI-S            PIC X(13).    
 
           COPY NTG. 
+       EXEC SQL INCLUDE ANACST.IF END-EXEC.       
        
        PROCEDURE DIVISION.
           DISPLAY "WS-NUM1 : "WS-NUM1.
           DISPLAY "WS-NAME : "WS-NAME.
           DISPLAY "WS-ID   : "WS-ID.
+
+        SELEZIONA-PREZZO-DBG.
+           PERFORM WITH TEST AFTER                                              
+           UNTIL SQLCODE <> NO-MEMORY AND <> DEADLOCK                           
+             PERFORM BEGIN-RC THRU BEGIN-RC-EX                                  
+             IF SQLCODE = OK                                                    
+               EXEC SQL                                                         
+
+               SELECT 
+                   P.prezzo
+                INTO :CC-PREZZO-DBG
+                FROM prezzi_modelli_dbg P
+                JOIN anagrafica_modelli_dbg M
+                    ON  (M.SOCIETA = P.SOCIETA)
+                    AND (P.MODELLO = M.MODELLO)
+                JOIN anagrafica_modelli_barcode_negozio_dbg B
+                    ON  (B.SOCIETA = P.SOCIETA) 
+                    AND (P.MODELLO = B.MODELLO)
+            
+                WHERE
+                    P.modello = :CC-C-MAT 
+                    AND M.societa = :CC-SOCIETA                             *'MM'
+                    AND P.f_listino_rif = :CC-LISTINO                        *1
+                    AND P.tipo_prezzo = :CC-TIPO-PREZZO                     *"V"
+
+               END-EXEC 
+             END-IF                                                        
+             MOVE SQLCODE TO SQLCODE-MEM                                        
+             PERFORM S-S-COMMIT THRU S-S-COMMIT-EX                                  
+           END-PERFORM.                                                         
+       EX-SELEZIONA-PREZZO-DBG. EXIT.
+
+
+
        STOP RUN.

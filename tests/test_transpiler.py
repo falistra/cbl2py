@@ -24,11 +24,11 @@ def Ztest_DataType_2():
     outpreprocessorfile = False
     Main(cobolfilename, copybookdirectory, pythonfilename, outPreprocessoFile = outpreprocessorfile)
 
-def Ztest_DataType_3():
+def test_DataType_3():
     cobolfilename = "./tests/cobol/DataType_3.cbl"
     copybookdirectory = './tests/cobol/cpy' 
     pythonfilename = "./tests/python/DataType_3.py" 
-    outpreprocessorfile = False
+    outpreprocessorfile = "./tests/python/DataType_3.pre.py"
     Main(cobolfilename, copybookdirectory, pythonfilename, outPreprocessoFile = outpreprocessorfile)
 
 def Ztest_READVE3():
@@ -39,7 +39,7 @@ def Ztest_READVE3():
     Main(cobolfilename, copybookdirectory, pythonfilename, outPreprocessoFile = outpreprocessorfile)
 
 
-def test_ASSSVSRT():
+def Ztest_ASSSVSRT():
     cobolfilename = "./tests/cobol/ASSSVSRT.cbl"
     copybookdirectory = './tests/cobol/cpy' 
     pythonfilename = "./tests/python/ASSSVSRT.py" 

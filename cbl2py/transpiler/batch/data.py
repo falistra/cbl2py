@@ -24,6 +24,52 @@ def XData(ctx:CobolParser.DataDescriptionEntryFormat1Context):
                     
 
     value = None
+    # dir_ctx = dir(ctx)
+    # for p in dir_ctx:
+    #     LOG.debug(p)
+    
+    if (ctx.dataRedefinesClause()):
+        LOG.debug("dataRedefinesClause")
+    # elif (ctx.dataIntegerStringClause()):
+    #     LOG.debug("dataIntegerStringClause")
+    # elif (ctx.dataExternalClause()):
+    #     LOG.debug("dataExternalClause")
+    # elif (ctx.dataGlobalClause()):
+    #     LOG.debug("dataGlobalClause")
+    # elif (ctx.dataTypeDefClause()):
+    #     LOG.debug("dataTypeDefClause")
+    # elif (ctx.dataThreadLocalClause()):
+    #     LOG.debug("dataThreadLocalClause")
+    # elif (ctx.dataPictureClause()):
+    #     LOG.debug("dataPictureClause")
+    # elif (ctx.dataCommonOwnLocalClause()):
+    #     LOG.debug("dataCommonOwnLocalClause")
+    # elif (ctx.dataTypeClause()):
+    #     LOG.debug("dataPictureClause")
+    # elif (ctx.dataTypeClause()):
+    #     LOG.debug("dataPictureClause")
+    # elif (ctx.dataUsingClause()):
+    #     LOG.debug("dataUsingClause")
+    # elif (ctx.dataUsageClause()):
+    #     LOG.debug("dataUsageClause")
+    # elif (ctx.dataReceivedByClause()):
+    #     LOG.debug("dataReceivedByClause")
+    # elif (ctx.dataOccursClause()):
+    #     LOG.debug("dataOccursClause")
+    # elif (ctx.dataSignClause()):
+    #     LOG.debug("dataSignClause")
+    # elif (ctx.dataSynchronizedClause()):
+    #     LOG.debug("dataSynchronizedClause")
+    # elif (ctx.dataJustifiedClause()):
+    #     LOG.debug("dataJustifiedClause")
+    # elif (ctx.dataBlankWhenZeroClause()):
+    #     LOG.debug("dataBlankWhenZeroClause")
+    # elif (ctx.dataWithLowerBoundsClause()):
+    #     LOG.debug("dataWithLowerBoundsClause")
+    # elif (ctx.dataAlignedClause()):
+    #     LOG.debug("dataAlignedClause")
+    # elif (ctx.dataRecordAreaClause()):
+    #     LOG.debug("dataRecordAreaClause")
     if (ctx.dataValueClause()):
         for vc in ctx.dataValueClause():
             if (vc.dataValueInterval()):
@@ -38,9 +84,12 @@ def XData(ctx:CobolParser.DataDescriptionEntryFormat1Context):
                                     value = '0'
                             else:
                                 value = vci.dataValueIntervalFrom().literal().getText()
+    elif (ctx.dataRedefinesClause()):
+        LOG.debug("dataRedefinesClause")
 
     if ctx.INTEGERLITERAL:
         level = ctx.INTEGERLITERAL
+        # LOG.debug(level)
     elif ctx.LEVEL_NUMBER_77:
         level = ctx.LEVEL_NUMBER_77
     else:

@@ -9,6 +9,7 @@ class CobolParserParams() :
         self.copyBookDirectories : list = [] # list<File> 
         self.copyBookExtensions : list = [] # list<String> 
         self.copyBookFiles : list = [] # list<File> 
+        self.pythonSQLfile = None
         self.dialect: CobolDialect = CobolDialect.ANSI85
         self.format : CobolSourceFormatEnum = CobolSourceFormatEnum(CobolSourceFormatEnum.FIXED, False)
         self.ignoreSyntaxErrors : bool = True
@@ -22,7 +23,6 @@ class CobolParserParams() :
     def getCopyBookExtensions(self) :
         return self.copyBookExtensions
 
-
     def getCopyBookFiles(self) :
         return self.copyBookFiles
         
@@ -35,8 +35,14 @@ class CobolParserParams() :
     def getIgnoreSyntaxErrors(self) :
         return self.ignoreSyntaxErrors
 
+    def getPythonSQLfile(self) :
+        return self.pythonSQLfile
+    
     def setCharset(self, charset) :
         self.charset = charset
+        
+    def setPythonSQLfile(self,pythonSQLfile) :
+        self.pythonSQLfile = pythonSQLfile
 
     def setCopyBookDirectories(self,copyBookDirectories) :
         self.copyBookDirectories = copyBookDirectories

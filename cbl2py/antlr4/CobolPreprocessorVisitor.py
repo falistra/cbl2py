@@ -44,6 +44,11 @@ class CobolPreprocessorVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by CobolPreprocessorParser#includeSource.
+    def visitIncludeSource(self, ctx:CobolPreprocessorParser.IncludeSourceContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by CobolPreprocessorParser#copyStatement.
     def visitCopyStatement(self, ctx:CobolPreprocessorParser.CopyStatementContext):
         return self.visitChildren(ctx)

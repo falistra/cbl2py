@@ -71,6 +71,15 @@ class CobolPreprocessorListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by CobolPreprocessorParser#includeSource.
+    def enterIncludeSource(self, ctx:CobolPreprocessorParser.IncludeSourceContext):
+        pass
+
+    # Exit a parse tree produced by CobolPreprocessorParser#includeSource.
+    def exitIncludeSource(self, ctx:CobolPreprocessorParser.IncludeSourceContext):
+        pass
+
+
     # Enter a parse tree produced by CobolPreprocessorParser#copyStatement.
     def enterCopyStatement(self, ctx:CobolPreprocessorParser.CopyStatementContext):
         pass

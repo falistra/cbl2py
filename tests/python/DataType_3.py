@@ -27,12 +27,21 @@ class Program():
         self.NTG_NTG = 10
         self.NTG_IN = None
         self.NTG_OUT = None
+        self.ANACST_C_MAT = None
+        self.ANACST_CST_STD = None
+        self.ANACST_CST_STD_2 = None
+        self.ANACST_TS_CST = None
 
         
     def HELLO(self):	# Linea Source Cobol: non definita
         print("WS-NUM1 : ",self.WS_NUM1)
         print("WS-NAME : ",self.WS_NAME)
         print("WS-ID   : ",self.WS_ID)
+
+    def SELEZIONA_PREZZO_DBG(self):	# Linea Source Cobol: 56
+        self.BEGIN_RC()
+        self.SQLCODE_MEM = self.SQLCODE
+        self.S_S_COMMIT()
 
 if __name__ == "__main__":
     program = Program()

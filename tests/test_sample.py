@@ -2,6 +2,18 @@
 def inc(x):
     return x + 1
 
+def dataValueClause():
+    return True
+
+def dataRecordAreaClause():
+    return False
 
 def Ztest_answer():
-    assert inc(3) == 4
+    n = 0
+    match n:
+        case n if n < 0:
+            print("Number is negative")
+        case n if n == 0:
+            print("Number is zero")
+        case n if n > 0:
+            print("Number is positive")    

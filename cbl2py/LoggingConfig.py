@@ -22,11 +22,11 @@ log_config = {
     "formatters":{
         "verbose std_out": {
             # "format": "%(asctime)s : %(levelname)s : %(module)s : %(funcName)s : %(lineno)d : (Process Details : (%(process)d, %(processName)s), Thread Details : (%(thread)d, %(threadName)s))\nLog : %(message)s",
-            "format": "%(asctime)s : %(levelname)s : %(module)s : %(funcName)s : %(lineno)d : (Process Details : (%(process)d, %(processName)s), Thread Details : (%(thread)d, %(threadName)s))\nLog : %(message)s",
+            "format": "%(asctime)s : %(levelname)s : %(module)s : %(funcName)s : %(lineno)d : (Process Details : (%(process)d, %(processName)s), Thread Details : (%(thread)d, %(threadName)s))Log : %(message)s",
             "datefmt":"%d-%m-%Y %I:%M:%S"
         },
         "short std_out": {
-            "format": "\nLog %(levelname)s: %(module)s:%(funcName)s:%(lineno)d %(message)s",
+            "format": "Log %(levelname)s: %(module)s:%(funcName)s:%(lineno)d %(message)s",
             "datefmt":"%d-%m-%Y %I:%M:%S"
         }
     },
