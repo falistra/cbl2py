@@ -38,7 +38,14 @@ class Program():
         print("WS-NAME : ",self.WS_NAME)
         print("WS-ID   : ",self.WS_ID)
 
-    def SELEZIONA_PREZZO_DBG(self):	# Linea Source Cobol: 56
+    def SE_SELECT_NEGOZIO_CATEG(self):	# Linea Source Cobol: 59
+        self.ER_DESCRIZIONE = "SELECT NEGOZIO-CATEG  "
+        self.TEST_ERR()
+
+    def SE_SELECT_NEGOZIO_CATEG_EX(self):	# Linea Source Cobol: 64
+        pass
+
+    def SELEZIONA_PREZZO_DBG(self):	# Linea Source Cobol: 68
         self.BEGIN_RC()
         self.SQLCODE_MEM = self.SQLCODE
         self.S_S_COMMIT()

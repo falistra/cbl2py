@@ -197,16 +197,11 @@ class CobolDocumentParserListener(CobolPreprocessorListener):
             text : str = TokenUtils.getTextIncludingHiddenTokens(ctx, self.tokens)
             sql = text # ctx.charDataSql().getText()
             sql = sql.replace("EXEC SQL","").replace("END-EXEC","")
-            textPython = f"""
-SQL{self.sqlVars} = \"\"\"
-{sql}            
-\"\"\"\n\n
-            """
+            textPython = f"""\n# Cobol source line :  {ctx.start.line}
+SQL{self.sqlVars} = \"\"\" {sql}\"\"\""""
+            self.sqlVars = self.sqlVars + 1
             self.params.getPythonSQLfile().write(textPython)
             text = f"          EXECSQL SQL{self.sqlVars}"
-#            linePrefix : str = CobolLine.createBlankSequenceArea(self.params.getFormat()) + CobolPreprocessorTokens.EXEC_SQL_TAG
-#            lines : str  = self.buildLines(text, linePrefix)
-
             self.context().write(text) # (lines)
             content = self.context().read()
             self.pop()

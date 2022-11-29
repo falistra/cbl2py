@@ -162,6 +162,10 @@ execCicsStatement
 execSqlStatement
    : EXEC SQL (includeSource | charDataSql) END_EXEC DOT?
    ;
+// declareSQL
+// declareSQL
+//    : (BEGIN | END) DECLARE SECTION
+//    ;
 
 // exec sql ims statement
 
@@ -342,6 +346,7 @@ ARITH : A R I T H;
 AUTO : A U T O;
 AWO : A W O;
 BIN : B I N;
+// BEGIN : B E G I N;
 BLOCK0 : B L O C K '0';
 BUF : B U F;
 BUFSIZE : B U F S I Z E;
@@ -368,6 +373,7 @@ DBCS : D B C S;
 DD : D D;
 DEBUG : D E B U G;
 DECK : D E C K;
+// DECLARE : D E C L A R E;
 DIAGTRUNC : D I A G T R U N C;
 DLI : D L I;
 DLL : D L L;
@@ -381,6 +387,7 @@ EDF : E D F;
 EJECT : E J E C T;
 EJPD : E J P D;
 EN : E N;
+// END : E N D;
 ENGLISH : E N G L I S H;
 END_EXEC : E N D '-' E X E C;
 EPILOG : E P I L O G;
@@ -555,6 +562,7 @@ REPLACE : R E P L A C E;
 REPLACING : R E P L A C I N G;
 RMODE : R M O D E;
 RPARENCHAR : ')';
+// SECTION : S E C T I O N;
 SEP : S E P;
 SEPARATE : S E P A R A T E;
 SEQ : S E Q;

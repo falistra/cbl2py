@@ -874,6 +874,20 @@ class Program():
         self.CC_LISTINO = None
         self.CC_TIPO_PREZZO = None
         self.CC_PREZZO_DBG = None
+        self.MOVSKU_RIF_INTERNO = None
+        self.MOVSKU_CMAT = None
+        self.MOVSKU_TG = None
+        self.MOVSKU_BARUNI = None
+        self.MOVSKU_CONTO = None
+        self.MOVSKU_MAG = None
+        self.MOVSKU_SKU = None
+        self.MOVSKU_IS_BARUNI_READ = None
+        self.MOVSKU_IS_BARUNI_CERTIFIED = None
+        self.MOVSKU_SKU_FATTURAZIONE = None
+        self.ANACST_C_MAT = None
+        self.ANACST_CST_STD = None
+        self.ANACST_CST_STD_2 = None
+        self.ANACST_TS_CST = None
         self.TAB_B2C_NO_DT = None
         self.EL_B2C_NO_DT = None
         self.MAG_B2C_NO_DT = None
@@ -1543,7 +1557,7 @@ class Program():
     def READVE3(self):	# Linea Source Cobol: non definita
         pass
 
-    def INIZIO(self):	# Linea Source Cobol: 2868
+    def INIZIO(self):	# Linea Source Cobol: 2898
         self.USCITA_PROGRAMMA = 0
         self.CONT = 0
         self.USCITA_DEVICE = 0
@@ -1554,10 +1568,10 @@ class Program():
         self.TRATTA_IMPEGNATO()
         self.TRATTA_NEG()
 
-    def FINE(self):	# Linea Source Cobol: 2891
+    def FINE(self):	# Linea Source Cobol: 2921
         pass
 
-    def TRATTA_DEV(self):	# Linea Source Cobol: 2897
+    def TRATTA_DEV(self):	# Linea Source Cobol: 2927
         self.DEV_IN = SPACES
         print("Disp. USCITA >> ")
         self.DEV_IN = input()
@@ -1568,7 +1582,7 @@ class Program():
         print("Dest. USCITA Err. ",self.DEV_IN)
         self.USCITA_DEVICE = 1
 
-    def TRATTA_IMPEGNATO(self):	# Linea Source Cobol: 2916
+    def TRATTA_IMPEGNATO(self):	# Linea Source Cobol: 2946
         self.DISIMPEGNA = SPACES
         print("Si vuole eliminare impegnato ?(SI/NO)")
         self.DISIMPEGNA = input()
@@ -1576,7 +1590,7 @@ class Program():
         self.DISIMPEGNA = "NO"
         print("Input non valido.")
 
-    def TRATTA_NEG(self):	# Linea Source Cobol: 2932
+    def TRATTA_NEG(self):	# Linea Source Cobol: 2962
         self.IND_RIGA = 100
         self.OK_NEG = 0
         self.IND_PAG = 0
@@ -1596,7 +1610,7 @@ class Program():
         self.TRATTA_OLD_NEW()
         self.TRATTA_LETTI()
 
-    def VERIFICA_SOC(self):	# Linea Source Cobol: 2997
+    def VERIFICA_SOC(self):	# Linea Source Cobol: 3027
         self.SOCIETA_INPUT = SPACE
         print("Soc >> (vuoto = tutti) ")
         self.SOCIETA_INPUT = input()
@@ -1607,7 +1621,7 @@ class Program():
         print("Soc Err. ",self.SOCIETA_INPUT)
         self.OK_NEG = 1
 
-    def CARICA_TAB_UNICO_DDT(self):	# Linea Source Cobol: 3016
+    def CARICA_TAB_UNICO_DDT(self):	# Linea Source Cobol: 3046
         self.INIT_PAR_TAB_UNICO_DDT()
         self.SW_FINE_CARICA_TAB = 0
         self.VERIFICA_AS()
@@ -1626,7 +1640,7 @@ class Program():
         self.SINO = input()
         print("sono dopo mostra-tab-unico")
 
-    def VERIFICA_AS(self):	# Linea Source Cobol: 3071
+    def VERIFICA_AS(self):	# Linea Source Cobol: 3101
         print("AS >> (tt=tutti) (elenco separato da ,) (CHIUDI)")
         self.ELENCO_AS = SPACES
         self.ELENCO_AS = input()
@@ -1641,7 +1655,7 @@ class Program():
         print("AS Err. ",self.AS_IN(I_AS))
         self.SW_AS_ERR = 1
 
-    def VERIFICA_CL(self):	# Linea Source Cobol: 3105
+    def VERIFICA_CL(self):	# Linea Source Cobol: 3135
         self.ELENCO_CL = SPACES
         print("CL >> (elenco separato da ,)")
         self.ELENCO_CL = input()
@@ -1656,7 +1670,7 @@ class Program():
         print("Cl Err. ",self.CL_IN(I_CL))
         self.SW_CL_ERR = 1
 
-    def VERIFICA_MAX_CAPI(self):	# Linea Source Cobol: 3139
+    def VERIFICA_MAX_CAPI(self):	# Linea Source Cobol: 3169
         print("MaxCapi >> (vuoto = tutti) ")
         self.MAX_CAPI_INPUT = input()
         self.QD_LL_A = 6
@@ -1665,10 +1679,10 @@ class Program():
         self.QD_NR_DEC = 0
         print("MaxCapi Err. ")
 
-    def CALL_DISIMPEGNA_MAG(self):	# Linea Source Cobol: 3219
+    def CALL_DISIMPEGNA_MAG(self):	# Linea Source Cobol: 3249
         pass
 
-    def INIZIA_TAB_ART(self):	# Linea Source Cobol: 3228
+    def INIZIA_TAB_ART(self):	# Linea Source Cobol: 3258
         self.QT_STATOOFPARTAB_ART = 0
         self.QT_NUM_ELEM_EFFOFPARTAB_ART = 0
         self.QT_INDEX_ELEMOFPARTAB_ART = 0
@@ -1677,7 +1691,7 @@ class Program():
         self.QT_ADDR_KEYOFPARTAB_ART = 1
         self.QT_LL_KEYOFPARTAB_ART = 8
 
-    def INIZIA_TAB_SING(self):	# Linea Source Cobol: 3247
+    def INIZIA_TAB_SING(self):	# Linea Source Cobol: 3277
         self.QT_STATOOFPARTAB_SING = 0
         self.QT_NUM_ELEM_EFFOFPARTAB_SING = 0
         self.QT_INDEX_ELEMOFPARTAB_SING = 0
@@ -1687,7 +1701,7 @@ class Program():
         self.QT_ADDR_KEYOFPARTAB_SING = 1
         self.QT_LL_KEYOFPARTAB_SING = 10
 
-    def LEGGI_PARAMDT(self):	# Linea Source Cobol: 3261
+    def LEGGI_PARAMDT(self):	# Linea Source Cobol: 3291
         self.W_NOME_DATA_SET = "DPARAM;"
         self.W_NOME_CAMPO = "C-AZIENDA;"
         self.W_VALORE_CAMPO_HW = 0
@@ -1699,11 +1713,11 @@ class Program():
         self.INDIRIZZO_DPARAM = self.W_WORD_ATT
         self.NUMERO_DDT = self.NUM_BOLLA_TAGLIO_FODERE
 
-    def DBGET_PARAMDT(self):	# Linea Source Cobol: 3286
+    def DBGET_PARAMDT(self):	# Linea Source Cobol: 3316
         self.TTDBGET()
         self.REC_PARAM_RID = self.AREA_REC_SET
 
-    def LEGGI_PARAMDT_FITTIZI(self):	# Linea Source Cobol: 3294
+    def LEGGI_PARAMDT_FITTIZI(self):	# Linea Source Cobol: 3324
         self.W_NOME_DATA_SET = "DPARAM;"
         self.W_NOME_CAMPO = "C-AZIENDA;"
         self.W_VALORE_CAMPO_HW = 0
@@ -1715,11 +1729,11 @@ class Program():
         self.INDIRIZZO_DPARAM = self.W_WORD_ATT
         self.NUMERO_DDT = self.PAR_FITTIZIO_1
 
-    def DBGET_PARAMDT_FTZ(self):	# Linea Source Cobol: 3319
+    def DBGET_PARAMDT_FTZ(self):	# Linea Source Cobol: 3349
         self.TTDBGET()
         self.REC_PARAM_FITTIZ_R = self.AREA_REC_SET
 
-    def VERIF_NEG(self):	# Linea Source Cobol: 3330
+    def VERIF_NEG(self):	# Linea Source Cobol: 3360
         self.D_CONTO_MEM = SPACES
         self.INDIRIZZO_COM = SPACES
         self.INDIRIZZO_C_COM = SPACES
@@ -1754,7 +1768,7 @@ class Program():
         self.CERCA_LISTINO()
         self.OK_NEG = 1
 
-    def TRATTA_OLD_NEW(self):	# Linea Source Cobol: 3390
+    def TRATTA_OLD_NEW(self):	# Linea Source Cobol: 3420
         print(SPACE)
         print(self.D_CONTO_MEM)
         print("dal mag ",self.MAG_INPUT)
@@ -1772,7 +1786,7 @@ class Program():
         self.STAMPA_RAPPORTINO()
         print("   rapportino stampato")
 
-    def LEGGI_IND(self):	# Linea Source Cobol: 3433
+    def LEGGI_IND(self):	# Linea Source Cobol: 3463
         self.W_NOME_CAMPO = "CONTO;"
         self.W_NOME_DATA_SET = "INDIRIZ;"
         self.TTDBFIND()
@@ -1782,7 +1796,7 @@ class Program():
         print("ERR INDIRIZZI",self.CONTO_IN_R)
         self.AZZERA_CAMPI_INDIRIZ()
 
-    def AZZERA_CAMPI_INDIRIZ(self):	# Linea Source Cobol: 3448
+    def AZZERA_CAMPI_INDIRIZ(self):	# Linea Source Cobol: 3478
         self.D_AGG = SPACE
         self.STATOOFREC_INDIRIZZI = SPACE
         self.SIGLA_PROVOFREC_INDIRIZZI(1) = SPACE
@@ -1796,7 +1810,7 @@ class Program():
         self.TELEFONOOFREC_INDIRIZZI = 0
         self.TELEXOFREC_INDIRIZZI = 0
 
-    def MUOVI_IND(self):	# Linea Source Cobol: 3467
+    def MUOVI_IND(self):	# Linea Source Cobol: 3497
         self.INDIRIZZO_STD = self.INDIRIZZOOFREC_INDIRIZZI(1)
         self.LL_STRINGA_IND = 66
         self.LL_SUBSTRINGA_IND = 60
@@ -1806,7 +1820,7 @@ class Program():
         self.FUNZIONE_IND = 1
         self.FUNZIONE_IND = 2
 
-    def MUOVI_CAP(self):	# Linea Source Cobol: 3497
+    def MUOVI_CAP(self):	# Linea Source Cobol: 3527
         self.D_CONTO_AGG_MEM = self.D_AGGOFREC_INDIRIZZI
         self.STATO_COM = self.STATOOFREC_INDIRIZZI
         self.CAP_COM = self.CAPOFREC_INDIRIZZI(1)
@@ -1814,7 +1828,7 @@ class Program():
         self.PROV_C_COM = self.SIGLA_PROVOFREC_INDIRIZZI(2)
         self.CAP_C_COM = self.CAPOFREC_INDIRIZZI(2)
 
-    def CERCA_LISTINO(self):	# Linea Source Cobol: 3511
+    def CERCA_LISTINO(self):	# Linea Source Cobol: 3541
         self.W_NOME_CAMPO = "CONTO;"
         self.W_NOME_DATA_SET = "CONFATT;"
         self.W_VALORE_CAMPO_W = self.CONTO_IN_R
@@ -1825,11 +1839,11 @@ class Program():
         self.LISTINO_MEM = self.LISTINOOFREC_CONFATT
         self.DIVISA_MEM = self.DIVISAOFREC_CONFATT
 
-    def SCEGLI_CONTO_FATTURA(self):	# Linea Source Cobol: 3526
+    def SCEGLI_CONTO_FATTURA(self):	# Linea Source Cobol: 3556
         self.CONTO_FATTURA_MEM = 0
         self.CONTO_FATTURA_MEM = self.TELEXOFREC_INDIRIZZI
 
-    def TRATTA_SITPF_3(self):	# Linea Source Cobol: 3539
+    def TRATTA_SITPF_3(self):	# Linea Source Cobol: 3569
         self.W_NOME_DATA_SET = "SITPF"
         self.W_NOME_CAMPO = "MAG"
         self.W_VALORE_CAMPO_HW = self.MAG_INPUT_R
@@ -1845,7 +1859,7 @@ class Program():
         print(" da allargare")
         self.COD_IN_RID = "."
 
-    def CALCOLA_AS_CL(self):	# Linea Source Cobol: 3579
+    def CALCOLA_AS_CL(self):	# Linea Source Cobol: 3609
         self.SW_ERR_AS_CL = 0
         self.W_VALORE_CAMPO = self.C_MAT_TRANS_RID
         self.W_NOME_DATA_SET = "ANAMAT;"
@@ -1863,7 +1877,7 @@ class Program():
         self.W_NOME_DATA_SET = "SITPF"
         self.W_MODO = 5
 
-    def SELEZIONA_SITPF_3(self):	# Linea Source Cobol: 3607
+    def SELEZIONA_SITPF_3(self):	# Linea Source Cobol: 3637
         self.TTDBGET_S()
         self.C_MAT_TRANS_RID = self.C_MATOFREC_SITPF
         self.CALCOLA_AS_CL()
@@ -1893,7 +1907,7 @@ class Program():
         self.W_MODO = 5
         self.TTDBGET_S()
 
-    def TRATTA_LEGGI(self):	# Linea Source Cobol: 3740
+    def TRATTA_LEGGI(self):	# Linea Source Cobol: 3770
         print("sono in tratta-leggi ")
         print(self.dep_tab_unico_ddt)
         self.MEM_COD_IN = SPACES
@@ -1971,7 +1985,7 @@ class Program():
         print("ERR INSERIM QTABEL ",self.ERR_DISP," - TRATTA-LEGGI")
         self.MEM_COD_IN = self.COD_IN
 
-    def INSERISCI_NO_GIAC_PREZZO(self):	# Linea Source Cobol: 4069
+    def INSERISCI_NO_GIAC_PREZZO(self):	# Linea Source Cobol: 4099
         print("INSERITO Manca GIAC.")
         self.CAUSALE_NO_GIAC(IND_CAPI_NO_GIAC) = "MancaGIAC"
         print("INS. Manca PREZZO x ESTERO")
@@ -1980,13 +1994,13 @@ class Program():
         self.D_MAT_NO_GIAC(IND_CAPI_NO_GIAC) = self.D_MAT_MEM
         self.PREZZO_NO_GIAC(IND_CAPI_NO_GIAC) = self.PREZZO_MEM
 
-    def TTDBGET_S(self):	# Linea Source Cobol: 4090
+    def TTDBGET_S(self):	# Linea Source Cobol: 4120
         pass
 
-    def TTDBGET(self):	# Linea Source Cobol: 4094
+    def TTDBGET(self):	# Linea Source Cobol: 4124
         self.W_INDICE_8 = 4
 
-    def TRATTA_NO_GIAC(self):	# Linea Source Cobol: 4121
+    def TRATTA_NO_GIAC(self):	# Linea Source Cobol: 4151
         self.RISP_NO_GIAC = SPACE
         print("     ",self.D_MAT_ELEM,SPACE,self.PREZZO_D)
         print("CONFERMI MANCA GIAC ? (S/N)")
@@ -1994,16 +2008,16 @@ class Program():
         print(self.RISP_NO_GIAC)
         self.OK_GIAC = 1
 
-    def TRATTA_NO_PREZZO(self):	# Linea Source Cobol: 4147
+    def TRATTA_NO_PREZZO(self):	# Linea Source Cobol: 4177
         self.RISP_NO_PREZZO = SPACE
         self.RISP_NO_PREZZO = "S"
         self.OK_PREZZO = 1
 
-    def TTDBFIND(self):	# Linea Source Cobol: 4165
+    def TTDBFIND(self):	# Linea Source Cobol: 4195
         self.W_MODO = 1
         self.W_INDICE_8 = 3
 
-    def INSERT_ELEM_SING(self):	# Linea Source Cobol: 4191
+    def INSERT_ELEM_SING(self):	# Linea Source Cobol: 4221
         self.QT_FUNZIONEOFPARTAB_SING = "K1"
         self.CONT_SING = self.IND_CAPI_LETTI
         self.C_MAT_SING = self.C_MAT_A_BARRE_RID
@@ -2012,10 +2026,10 @@ class Program():
         self.PREZZO_SING = self.PREZZO_MEM
         self.SKU_SING = SPACES
 
-    def PRZ_INLIT(self):	# Linea Source Cobol: 4258
+    def PRZ_INLIT(self):	# Linea Source Cobol: 4288
         print(self.IE_MSG)
 
-    def DELETE_ELEM_SING(self):	# Linea Source Cobol: 4277
+    def DELETE_ELEM_SING(self):	# Linea Source Cobol: 4307
         self.QT_FUNZIONEOFPARTAB_SING = "K3"
         self.CONT_SING = self.IND_CAPI_LETTI
         self.C_MAT_SING = self.C_MAT_A_BARRE_RID
@@ -2024,7 +2038,7 @@ class Program():
         print("ANNULLO PREC")
         print("PER ELEMENTO     ",self.C_MAT_A_BARRE_RID)
 
-    def TRATTA_LETTI(self):	# Linea Source Cobol: 4298
+    def TRATTA_LETTI(self):	# Linea Source Cobol: 4328
         print(SPACE)
         self.TOT_CAPI_LETTI_1 = self.IND_CAPI_LETTI
         print("- Tot CAPI - ",self.TOT_CAPI_LETTI_1)
@@ -2082,14 +2096,14 @@ class Program():
         print("premi un tasto per continuare...")
         self.TASTO_INP = input()
 
-    def ALLINEA_BOLLA_ESTERO(self):	# Linea Source Cobol: 4472
+    def ALLINEA_BOLLA_ESTERO(self):	# Linea Source Cobol: 4502
         self.INPUT_RIF_TRASF = self.RIF_BOLLA_DDT
         self.INPUT_CONTO_TRASF = self.CONTO_FATTURA_MEM
         self.INPUT_CONTO_TRASF = self.CONTO_IN_R
         print('ERRORE!')
         print(self.OUTPUT_ERR_TRASF)
 
-    def AVANZA_DDT(self):	# Linea Source Cobol: 4491
+    def AVANZA_DDT(self):	# Linea Source Cobol: 4521
         self.INPUT_RIF_INTR = self.RIF_BOLLA_DDT
         self.INPUT_CONTO = self.CONTO_FATTURA_MEM
         self.INPUT_CONTO = self.CONTO_IN_R
@@ -2097,7 +2111,7 @@ class Program():
         self.INPUT_FLAG = 'E'
         print('AVANZAMENTO NON RIUSCITO')
 
-    def CALL_COMMAND(self):	# Linea Source Cobol: 4513
+    def CALL_COMMAND(self):	# Linea Source Cobol: 4543
         self.BUILD_N_DDT = self.NUMERO_DDT
         self.PURGE_N_DDT = self.NUMERO_DDT
         self.FILE_N_DDT = self.NUMERO_DDT
@@ -2110,14 +2124,14 @@ class Program():
         print("Errore COMMAND FILE ECQ - P",self.BUILD_N_DDT,SPACE,"-  ",self.ERR_DISP)
         self.JRUNC = 1
 
-    def STAMPA_NO_GIAC(self):	# Linea Source Cobol: 4545
+    def STAMPA_NO_GIAC(self):	# Linea Source Cobol: 4575
         self.CONTA_RIGHE = 100
         self.CONTA_PAGINE = 1
         self.APRI_STAMPA()
         self.STAMPA_DETT_N_G()
         self.CHIUDI_STAMPA()
 
-    def APRI_STAMPA(self):	# Linea Source Cobol: 4558
+    def APRI_STAMPA(self):	# Linea Source Cobol: 4588
         self.LL_RIGA = 136
         self.N_MAX_RIGHE = 9999
         self.PRE_NOME_FILE = "N"
@@ -2128,14 +2142,14 @@ class Program():
         self.DATI_RIGA = " MANCA GIAC./PREZZO SU VENDITA "
         self.DATI_RIGA = SPACES
 
-    def SCRIVI(self):	# Linea Source Cobol: 4578
+    def SCRIVI(self):	# Linea Source Cobol: 4608
         self.STATO_DISPLAY = self.STATOOFPAR_PRINT
         print("ERRORE QPRINT CON STATO : ",self.STATO_DISPLAY)
         self.DATI_RIGA = SPACES
         self.COMANDO = "S"
         self.N_RIGA_STAMPA = 0
 
-    def INTESTA_PAGINA(self):	# Linea Source Cobol: 4593
+    def INTESTA_PAGINA(self):	# Linea Source Cobol: 4623
         self.DATI_RIGA = SPACE
         self.DATA_T = self.W_FORMATO_GG_MMM_AAAA
         self.NUM_PAG_T = self.W_NUM_TERM
@@ -2158,7 +2172,7 @@ class Program():
         self.N_RIGA_STAMPA = 1
         self.CONTA_RIGHE = 5
 
-    def STAMPA_DETT_N_G(self):	# Linea Source Cobol: 4627
+    def STAMPA_DETT_N_G(self):	# Linea Source Cobol: 4657
         self.INTESTA_PAGINA()
         self.C_MAT_A_BARRE_RID = self.C_MAT_NO_GIAC(W_INDICE_3)
         self.C_MAT_TRANS_RID = 0
@@ -2175,10 +2189,10 @@ class Program():
         self.NOPRZ_ST = self.CAUSALE_NO_PRZ(W_INDICE_3)
         self.SCRIVI()
 
-    def CHIUDI_STAMPA(self):	# Linea Source Cobol: 4660
+    def CHIUDI_STAMPA(self):	# Linea Source Cobol: 4690
         pass
 
-    def CALL_COMMAND_2(self):	# Linea Source Cobol: 4667
+    def CALL_COMMAND_2(self):	# Linea Source Cobol: 4697
         self.WK_VAR_NAME = "dd_PEND"
         self.WK_VAR_VALUE = SPACES
         print(self.WK_VAR_NAME)
@@ -2186,7 +2200,7 @@ class Program():
         self.LPR_NOME_FILE = self.WK_VAR_VALUE
         self.LPR_NUM_STAMPANTE = self.DESTINO_USCITA
 
-    def CHIAMA_WRITERES(self):	# Linea Source Cobol: 4715
+    def CHIAMA_WRITERES(self):	# Linea Source Cobol: 4745
         self.CAPO_CONTO = 0
         self.SOTTO_CONTO = self.NEG_IN
         self.RIF_INTR_WR = self.RIF_BOLLA_DDT
@@ -2200,7 +2214,7 @@ class Program():
         self.CAUSALE_WR = "VESD"
         self.DATA_CARICO_WR = 0
 
-    def SCRIVI_BOLLE(self):	# Linea Source Cobol: 4744
+    def SCRIVI_BOLLE(self):	# Linea Source Cobol: 4774
         self.W_NOME_DATA_SET = "BOLLE;"
         self.CONTOOFREC_BOLLE = self.CONTO_FATTURA_MEM
         self.CONTOOFREC_BOLLE = self.CONTO_IN_R
@@ -2215,7 +2229,7 @@ class Program():
         print("Err. PUT BOLLE  ",self.ERR_DISP)
         print("Per CONTO  ",self.CONTO_IN_R,"   RIF-INTERNO  ",self.RIF_BOLLA_DDT)
 
-    def TRATTA_STORNO(self):	# Linea Source Cobol: 4774
+    def TRATTA_STORNO(self):	# Linea Source Cobol: 4804
         self.COD_IN = SPACES
         self.COD_IN = input()
         self.IND_CAPI_LETTI = 0
@@ -2237,7 +2251,7 @@ class Program():
         self.PRZ_INLIT()
         self.ART_TAB_LETTI(QT_INDEX_ELEMOFPARTAB_ART) = self.ART_ELEM_LETTI
 
-    def SCORRI_TB(self):	# Linea Source Cobol: 4833
+    def SCORRI_TB(self):	# Linea Source Cobol: 4863
         self.COMANDI_IGP_TESTA()
         self.VERT_EXP_IGP = 0
         self.ORIZ_EXP_IGP = 0
@@ -2252,7 +2266,7 @@ class Program():
         self.SCORRI_TB_SING()
         self.SCRIVI_ETICH_VUOTA()
 
-    def SCORRI_TB_SING(self):	# Linea Source Cobol: 4867
+    def SCORRI_TB_SING(self):	# Linea Source Cobol: 4897
         self.COMANDI_IGP_TESTA_1()
         self.RIGA_PENDENTI = SPACES
         self.METTI_VALORI_PEND()
@@ -2271,7 +2285,7 @@ class Program():
         self.IND_PEND = 1
         self.IND_PEND = 0
 
-    def SCRIVI_ETICH_VUOTA(self):	# Linea Source Cobol: 4912
+    def SCRIVI_ETICH_VUOTA(self):	# Linea Source Cobol: 4942
         self.ROW_IGP = 80
         self.COL_IGP = 100
         self.COMANDI_IGP_TESTA_1()
@@ -2279,7 +2293,7 @@ class Program():
         self.SCRIVI_RECORD_IGP()
         self.COMANDI_IGP_FINE_1()
 
-    def METTI_VALORI_PEND(self):	# Linea Source Cobol: 4924
+    def METTI_VALORI_PEND(self):	# Linea Source Cobol: 4954
         self.NUMERO_P = self.NUMERO_DDT
         self.ELEMENTO_SINGOLI = self.ELEM_TAB_SING(W_INDICE_3)
         self.CODICE_P = self.C_MAT_SING
@@ -2292,7 +2306,7 @@ class Program():
         self.DIV_LIT = self.IE_DIVISA_OU
         self.PREZZO_P = 0
 
-    def CERCA_PREZZO_PUBBL(self):	# Linea Source Cobol: 4981
+    def CERCA_PREZZO_PUBBL(self):	# Linea Source Cobol: 5011
         self.PREZZO_PUBBL = 0
         self.C_MAT_A_BARRE_RID = self.C_MAT_SING
         self.C_MAT_TRANS_RIDOFC_MAT_COM = 0
@@ -2304,7 +2318,7 @@ class Program():
         self.TRATTA_MODELLI_DBG()
         self.CERCA_PREZZO_PUBBL_2()
 
-    def TRATTA_MODELLI_DBG(self):	# Linea Source Cobol: 5038
+    def TRATTA_MODELLI_DBG(self):	# Linea Source Cobol: 5068
         self.CC_SOCIETA = self.SOCIETA_SIGLA(SOCIETA_MODOFC_MAT_TRANSITO)
         self.CC_C_MAT = self.C_MAT_TRANS_RIDOFC_MAT_COM
         self.CC_LISTINo = 1
@@ -2314,12 +2328,12 @@ class Program():
         self.TEST_ERR()
         self.PREZZO_PUBBL = self.CC_PREZZO_DBG
 
-    def SELEZIONA_PREZZO_DBG(self):	# Linea Source Cobol: 5063
+    def SELEZIONA_PREZZO_DBG(self):	# Linea Source Cobol: 5093
         self.BEGIN_RC()
         self.SQLCODE_MEM = self.SQLCODE
         self.S_S_COMMIT()
 
-    def CERCA_PREZZO_PUBBL_2(self):	# Linea Source Cobol: 5178
+    def CERCA_PREZZO_PUBBL_2(self):	# Linea Source Cobol: 5189
         self.PREZZO_PUBBL = 0
         self.W_NOME_DATA_SET = "PREZZI;"
         self.W_NOME_CAMPO = "C-MAT;"
@@ -2329,7 +2343,7 @@ class Program():
         self.TTDBGET_P_PUB()
         self.PREZZO_PUBBL = self.PREZZO_VENDITAOFREC_PREZZI_PUB(1)
 
-    def SCORRI_TAB_SING(self):	# Linea Source Cobol: 5204
+    def SCORRI_TAB_SING(self):	# Linea Source Cobol: 5215
         self.ELEMENTO_SINGOLI = self.ELEM_TAB_SING(W_INDICE_3)
         print("SCORRI-TAB-SING")
         print(self.C_MAT_SING,SPACE,self.CONT_SING,SPACE,self.D_MAT_SING)
@@ -2361,10 +2375,10 @@ class Program():
         self.W_INDICE_4 = self.FUNCTIONidxtg(NTG_IN)
         self.ESPLODI_TG()
 
-    def INTESTA_FILE_BC(self):	# Linea Source Cobol: 5246
+    def INTESTA_FILE_BC(self):	# Linea Source Cobol: 5257
         self.REC_BC = SPACE
 
-    def CERCA_PREZZO_V(self):	# Linea Source Cobol: 5259
+    def CERCA_PREZZO_V(self):	# Linea Source Cobol: 5270
         self.W_NOME_DATA_SET = "PREZZI;"
         self.W_NOME_CAMPO = "C-MAT;"
         self.TTDBFIND()
@@ -2373,7 +2387,7 @@ class Program():
         self.TTDBGET_P()
         self.PREZZO_MEM = self.PREZZO_VENDITAOFREC_PREZZI(1)
 
-    def SCRIVI_RECORD(self):	# Linea Source Cobol: 5279
+    def SCRIVI_RECORD(self):	# Linea Source Cobol: 5290
         self.ART_ELEM_LETTI = self.ART_TAB_LETTI(W_INDICE_3)
         self.C_MAT_TRANS_RID = 0
         self.MODELLOOFC_MAT_TRANSITO = self.MODELLOOFC_MAT_A_BARRE
@@ -2386,10 +2400,10 @@ class Program():
         self.CREA_MOVMAG_P_3()
         self.AGGIORNA_SITPF_P_3()
 
-    def INVERTI_QTA(self):	# Linea Source Cobol: 5326
+    def INVERTI_QTA(self):	# Linea Source Cobol: 5337
         pass
 
-    def CERCA_PREZZO(self):	# Linea Source Cobol: 5333
+    def CERCA_PREZZO(self):	# Linea Source Cobol: 5344
         self.W_NOME_DATA_SET = "ANAMAT;"
         self.W_MODO = 7
         self.TTDBGET()
@@ -2398,7 +2412,7 @@ class Program():
         self.CHIAMA_DTVALSTK()
         self.CERCA_PREZZIA()
 
-    def CHIAMA_DTVALSTK(self):	# Linea Source Cobol: 5355
+    def CHIAMA_DTVALSTK(self):	# Linea Source Cobol: 5366
         self.STK_C_MAT = self.C_MAT_TRANS_RID
         self.STK_COLL = self.COLLEZIONEOFREC_ANAMAT
         self.STK_STAGIONE = self.STAGIONEOFREC_ANAMAT
@@ -2411,7 +2425,7 @@ class Program():
         self.PREZZO_MEM = self.STK_PRZ_SCO
         self.CAMBIO_MEM = self.STK_CAMBIO
 
-    def CERCA_PREZZIA(self):	# Linea Source Cobol: 5415
+    def CERCA_PREZZIA(self):	# Linea Source Cobol: 5426
         self.W_NOME_DATA_SET = "PREZZIA;"
         self.W_NOME_CAMPO = "C-MAT;"
         self.TTDBFIND()
@@ -2421,14 +2435,14 @@ class Program():
         self.PREZZO_MEM = self.PREZZO_VENDITAOFREC_PREZZI(1)
         self.CAMBIO_MEM = 0
 
-    def ESPLODI_8_TG(self):	# Linea Source Cobol: 5436
+    def ESPLODI_8_TG(self):	# Linea Source Cobol: 5447
         self.ESPLODI_TG()
 
-    def ESPLODI_TG(self):	# Linea Source Cobol: 5446
+    def ESPLODI_TG(self):	# Linea Source Cobol: 5457
         self.TAGLIA_S = self.W_INDICE_4
         self.T_TG()
 
-    def T_TG(self):	# Linea Source Cobol: 5457
+    def T_TG(self):	# Linea Source Cobol: 5468
         self.TG_OUT_S = self.TG_CAL
         self.TG_OUT_S = "XS"
         self.TG_OUT_S = " S"
@@ -2436,37 +2450,37 @@ class Program():
         self.TG_OUT_S = " L"
         self.TG_OUT_S = "XL"
 
-    def TTUNLOCK(self):	# Linea Source Cobol: 5476
+    def TTUNLOCK(self):	# Linea Source Cobol: 5487
         self.W_MODO = 1
         self.W_INDICE_8 = 8
 
-    def TTLOCK_T(self):	# Linea Source Cobol: 5501
+    def TTLOCK_T(self):	# Linea Source Cobol: 5512
         pass
 
-    def TTLOCK(self):	# Linea Source Cobol: 5503
+    def TTLOCK(self):	# Linea Source Cobol: 5514
         self.W_INDICE_8 = 5
 
-    def TTDBPUT(self):	# Linea Source Cobol: 5527
+    def TTDBPUT(self):	# Linea Source Cobol: 5538
         self.W_MODO = 1
         self.W_INDICE_8 = 7
 
-    def TTUPDATE(self):	# Linea Source Cobol: 5555
+    def TTUPDATE(self):	# Linea Source Cobol: 5566
         self.W_MODO = 1
         self.W_INDICE_8 = 9
 
-    def TTDBGET_P(self):	# Linea Source Cobol: 5582
+    def TTDBGET_P(self):	# Linea Source Cobol: 5593
         pass
 
-    def TTDBGET_P_PUB(self):	# Linea Source Cobol: 5586
+    def TTDBGET_P_PUB(self):	# Linea Source Cobol: 5597
         pass
 
-    def DISP_C_MAT(self):	# Linea Source Cobol: 5593
+    def DISP_C_MAT(self):	# Linea Source Cobol: 5604
         self.RIGA_DISP = SPACES
         self.IND_4 = 1
         self.METTI_4()
         print(self.RIGA_DISP)
 
-    def METTI_4(self):	# Linea Source Cobol: 5604
+    def METTI_4(self):	# Linea Source Cobol: 5615
         self.DISP_ART(IND_4) = self.TAB_ART(W_INDICE_3)
         self.PARE1(IND_4) = "("
         self.PARE2(IND_4) = ")"
@@ -2475,24 +2489,24 @@ class Program():
         self.ACCUMULA_QTA()
         self.QTA_DISP(IND_4) = self.COM_QTA_DISP
 
-    def ACCUMULA_QTA(self):	# Linea Source Cobol: 5624
+    def ACCUMULA_QTA(self):	# Linea Source Cobol: 5635
         pass
 
-    def AGG_DPARAM(self):	# Linea Source Cobol: 5632
+    def AGG_DPARAM(self):	# Linea Source Cobol: 5643
         self.W_NOME_DATA_SET = "DPARAM;"
         self.AREA_REC_SET = self.REC_PARAM_RID
         self.TTUPDATE()
 
-    def AGG_DPARAM_FITTIZI(self):	# Linea Source Cobol: 5641
+    def AGG_DPARAM_FITTIZI(self):	# Linea Source Cobol: 5652
         self.W_NOME_DATA_SET = "DPARAM;"
         self.AREA_REC_SET = self.REC_PARAM_FITTIZ_R
         self.TTUPDATE()
 
-    def GET_LOCALITA(self):	# Linea Source Cobol: 5651
+    def GET_LOCALITA(self):	# Linea Source Cobol: 5662
         self.LOCALITA_PART_STR = SPACES
         self.LOCALITA_PART_STR = self.DESC_LOC(IND_LOC)
 
-    def CHIAMA_PRINTDDT(self):	# Linea Source Cobol: 5665
+    def CHIAMA_PRINTDDT(self):	# Linea Source Cobol: 5676
         self.MAGAZZINO_DDT = self.MAG_INPUT_R
         self.TIPO_DOC_DDT = 1
         self.TIPO_MOVIMENTO_DDT = 11
@@ -2513,7 +2527,7 @@ class Program():
         self.RIGA_1_DDT = SPACE
         self.RIGA_2_DDT = SPACE
 
-    def PREPARA_MOVMAG(self):	# Linea Source Cobol: 5738
+    def PREPARA_MOVMAG(self):	# Linea Source Cobol: 5749
         self.MOVMAG = LOW-VALUE
         self.VAL_RECOFMOVMAG = SPACES
         self.NUMERO_RIGAOFMOVMAG = 1
@@ -2531,7 +2545,7 @@ class Program():
         self.DIVISAOFMOVMAG = "EUR "
         self.C_MATOFMOVMAG = self.C_MAT_TRANS_RID
 
-    def CREA_MOVMAG_P_3(self):	# Linea Source Cobol: 5770
+    def CREA_MOVMAG_P_3(self):	# Linea Source Cobol: 5781
         self.PREZZOOFMOVMAG = self.COSTO_ELEM
         self.COSTO_STDOFMOVMAG = self.PREZZO_ELEM
         self.MOD_IMPUTAZOFMOVMAG = self.CAMBIO_ELEM
@@ -2548,7 +2562,7 @@ class Program():
         print("ERR PUT MOVMAG-P3- ",self.STATO_DISPLAY)
         print("PER C-MAT ",self.C_MAT_TRANSITO)
 
-    def AGGIORNA_SITPF_P_3(self):	# Linea Source Cobol: 5806
+    def AGGIORNA_SITPF_P_3(self):	# Linea Source Cobol: 5817
         self.PARAGGPF = LOW-VALUE
         self.C_MATOFPARAGGPF = self.C_MAT_TRANS_RID
         self.MAGAZZINOOFPARAGGPF = self.MAG_INPUT_R
@@ -2556,7 +2570,7 @@ class Program():
         self.QTA_8OFPARAGGPF = self.QTA_TAGLIE_NEG
         self.F_GIACOFPARAGGPF = 1
 
-    def CARICA_TABELLA(self):	# Linea Source Cobol: 5828
+    def CARICA_TABELLA(self):	# Linea Source Cobol: 5839
         self.STK_C_MAT = 0
         self.STK_STAGIONE = 0
         self.STK_COLL = 0
@@ -2568,57 +2582,57 @@ class Program():
         self.NOME_IN_5 = self.CONTO_IN_R
         self.STK_NOME = self.NOME_IN_35
 
-    def STAMPA_RAPPORTINO(self):	# Linea Source Cobol: 5871
+    def STAMPA_RAPPORTINO(self):	# Linea Source Cobol: 5882
         print('M',self.TAB_ARTOFART_TAB_LETTI(W_INDICE_3))
 
-    def VERIF_MAG(self):	# Linea Source Cobol: 5887
+    def VERIF_MAG(self):	# Linea Source Cobol: 5898
         print("MAG provenienza (3 cifre)")
         self.MAG_INPUT = input()
         print("MAG non numerico")
         print(self.SUGG_MAG_DISP)
         self.MAG_INPUT = SPACE
 
-    def VERIF_F_V(self):	# Linea Source Cobol: 5908
+    def VERIF_F_V(self):	# Linea Source Cobol: 5919
         self.F_V_INPUT = "V"
 
-    def TEST_ERR(self):	# Linea Source Cobol: 5929
+    def TEST_ERR(self):	# Linea Source Cobol: 5940
         self.SQL_STATUS = self.SQLCODE
 
-    def TEST_ERR_EX(self):	# Linea Source Cobol: 5936
+    def TEST_ERR_EX(self):	# Linea Source Cobol: 5947
         pass
 
-    def BEGIN_RC(self):	# Linea Source Cobol: 5940
+    def BEGIN_RC(self):	# Linea Source Cobol: 5951
         self.ER_DESCRIZIONE = "BEGIN WORK RC"
         self.TEST_ERR()
 
-    def BEGIN_RC_EX(self):	# Linea Source Cobol: 5946
+    def BEGIN_RC_EX(self):	# Linea Source Cobol: 5955
         pass
 
-    def S_S_COMMIT(self):	# Linea Source Cobol: 5950
+    def S_S_COMMIT(self):	# Linea Source Cobol: 5959
         self.ER_DESCRIZIONE = "COMMIT WORK"
         self.TEST_ERR()
 
-    def S_S_COMMIT_EX(self):	# Linea Source Cobol: 5956
+    def S_S_COMMIT_EX(self):	# Linea Source Cobol: 5963
         pass
 
-    def COMANDI_IGP_TESTA(self):	# Linea Source Cobol: 6015
+    def COMANDI_IGP_TESTA(self):	# Linea Source Cobol: 6022
         self.REC_PEND = self.COMIGP_PTXSETUP
         self.REC_PEND = self.COMIGP_PTXCFG2
         self.REC_PEND = self.COMIGP_PTXEND
 
-    def COMANDI_IGP_TESTA_1(self):	# Linea Source Cobol: 6026
+    def COMANDI_IGP_TESTA_1(self):	# Linea Source Cobol: 6033
         self.REC_PEND = self.COMIGP_LISTEN
         self.REC_PEND = self.COMIGP_CREATE
         self.REC_PEND = self.COMIGP_SCALEDOT
         self.REC_PEND = self.COMIGP_ALPHA
 
-    def COMANDI_IGP_FINE_1(self):	# Linea Source Cobol: 6039
+    def COMANDI_IGP_FINE_1(self):	# Linea Source Cobol: 6046
         self.REC_PEND = self.COMIGP_STOP
         self.REC_PEND = self.COMIGP_END
         self.REC_PEND = self.COMIGP_EXECUTE
         self.REC_PEND = self.COMIGP_QUIET
 
-    def SCRIVI_RECORD_IGP(self):	# Linea Source Cobol: 6052
+    def SCRIVI_RECORD_IGP(self):	# Linea Source Cobol: 6059
         self.REC_PEND = SPACES
         self.TEMP_X_IN = self.ROW_IGP
         self.TOGLI_ZERI()
@@ -2627,12 +2641,12 @@ class Program():
         self.TOGLI_ZERI()
         self.COL_X_IGP = self.TEMP_X_OUT
 
-    def TOGLI_ZERI(self):	# Linea Source Cobol: 6081
+    def TOGLI_ZERI(self):	# Linea Source Cobol: 6088
         self.PRIMO_NONZERO = 0
         self.PRIMO_NONZERO = self.K
         self.TEMP_X_OUT = self.TEMP_X_IN
 
-    def INSERISCI_MOVSKU(self):	# Linea Source Cobol: 6101
+    def INSERISCI_MOVSKU(self):	# Linea Source Cobol: 6108
         self.ELEMENTO_SINGOLI = self.ELEM_TAB_SING(IND_BARUNI)
         self.OUTPUT_VAL_A = '1'
         self.OUTPUT_VAL_B = SPACES
@@ -2653,10 +2667,10 @@ class Program():
         self.ER_DESCRIZIONE = "Insert MOV-SKU "
         self.TEST_ERR()
 
-    def INSERISCI_MOVSKU_EX(self):	# Linea Source Cobol: 6155
+    def INSERISCI_MOVSKU_EX(self):	# Linea Source Cobol: 6147
         pass
 
-    def CONVERTI_BARCODE(self):	# Linea Source Cobol: 6158
+    def CONVERTI_BARCODE(self):	# Linea Source Cobol: 6150
         self.C_MAT_COM = ZEROS
         self.C_MAT_A_BARRE_RID = self.C_MAT_SING
         self.MODELLOOFC_MAT_COM = self.MODELLOOFC_MAT_A_BARRE
@@ -2666,23 +2680,23 @@ class Program():
         self.SOCIETA_MODOFC_MAT_COM = self.SOC_BC_MODOFC_MAT_A_BARRE
         self.COLOREOFC_MAT_COM = self.VARIANTE_COLOFC_MAT_A_BARRE
 
-    def CHIAMA_GETBARUNI(self):	# Linea Source Cobol: 6180
+    def CHIAMA_GETBARUNI(self):	# Linea Source Cobol: 6172
         self.INPUT_VAL = self.C_MAT_SING
         self.INPUT_VAL_B = self.RIF_BOLLA_DDT
         self.INPUT_VAL_C = "READVE3"
         print(self.OUTPUT_VAL_B)
 
-    def CHIAMA_GETBARUNI_EX(self):	# Linea Source Cobol: 6192
+    def CHIAMA_GETBARUNI_EX(self):	# Linea Source Cobol: 6184
         pass
 
-    def INSERT_SKU_E_SING(self):	# Linea Source Cobol: 6195
+    def INSERT_SKU_E_SING(self):	# Linea Source Cobol: 6187
         self.QT_FUNZIONEOFPARTAB_SING = "K2"
         self.SKU_SING = self.OUTPUT_VAL_B_OK
         self.ELEM_TAB_SING(QT_INDEX_ELEMOFPARTAB_SING)(24:13) = self.SKU_SING
         self.ERR_DISP = self.QT_STATOOFPARTAB_SING
         print("ERR UPDATE QTABEL ",self.ERR_DISP," - INSERISCI-SKU")
 
-    def CARICA_B2C_NO_DT(self):	# Linea Source Cobol: 6240
+    def CARICA_B2C_NO_DT(self):	# Linea Source Cobol: 6232
         self.BEGIN_RC()
         self.SE_SELECT_NEGOZIO_CATEG()
         print("NESSUNA NEGOZIO CATEGORIA TROVATA")
@@ -2690,22 +2704,22 @@ class Program():
         self.NUM_B2C_NO_DT = self.SQLERRD(3)
         self.S_S_COMMIT()
 
-    def SE_SELECT_NEGOZIO_CATEG(self):	# Linea Source Cobol: 6272
+    def SE_SELECT_NEGOZIO_CATEG(self):	# Linea Source Cobol: 6264
         self.ER_DESCRIZIONE = "SELECT NEGOZIO-CATEG  "
         self.TEST_ERR()
 
-    def SE_SELECT_NEGOZIO_CATEG_EX(self):	# Linea Source Cobol: 6284
+    def SE_SELECT_NEGOZIO_CATEG_EX(self):	# Linea Source Cobol: 6269
         pass
 
-    def RIVALUTA_COSTO_ANAMAT(self):	# Linea Source Cobol: 6293
+    def RIVALUTA_COSTO_ANAMAT(self):	# Linea Source Cobol: 6278
         self.CERCA_B2C_NO_DT()
         self.RICERCA_COSTO_ANAMAT()
 
-    def CERCA_B2C_NO_DT(self):	# Linea Source Cobol: 6300
+    def CERCA_B2C_NO_DT(self):	# Linea Source Cobol: 6285
         self.FLAG_B2C_NO_DT = 'N'
         self.FLAG_B2C_NO_DT = 'S'
 
-    def RICERCA_COSTO_ANAMAT(self):	# Linea Source Cobol: 6314
+    def RICERCA_COSTO_ANAMAT(self):	# Linea Source Cobol: 6299
         self.ANACST_C_MAT = self.ANACST_C_MAT_COM
         self.ANACST_CST_COM = 0
         self.BEGIN_RC()
@@ -2714,51 +2728,51 @@ class Program():
         self.ANACST_CST_COM = self.ANACST_CST_STD
         self.S_S_COMMIT()
 
-    def SE_SELECT_ANAMAT_CST(self):	# Linea Source Cobol: 6341
+    def SE_SELECT_ANAMAT_CST(self):	# Linea Source Cobol: 6326
         self.ER_DESCRIZIONE = "SELECT ANAMAT_CST   "
         self.TEST_ERR()
 
-    def SE_SELECT_ANAMAT_CST_EX(self):	# Linea Source Cobol: 6351
+    def SE_SELECT_ANAMAT_CST_EX(self):	# Linea Source Cobol: 6331
         pass
 
-    def INIT_PAR_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6360
+    def INIT_PAR_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6340
         self.QT_LL_ELEMOFPAR_TAB_UNICO_DDT = 16
         self.QT_LL_KEYOFPAR_TAB_UNICO_DDT = 4
         self.QT_ADDR_KEYOFPAR_TAB_UNICO_DDT = 1
         self.QT_NUM_ELEM_MAXOFPAR_TAB_UNICO_DDT = 1980
         self.QT_NUM_ELEM_EFFOFPAR_TAB_UNICO_DDT = 0
 
-    def LEGGI_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6370
+    def LEGGI_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6350
         self.QT_FUNZIONEOFPAR_TAB_UNICO_DDT = "K2"
         self.PRENDI_DEP_TAB_UNICO_DDT()
 
-    def PRENDI_DEP_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6383
+    def PRENDI_DEP_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6363
         self.DEP_TAB_UNICO_DDT = self.ELE_TAB_UNICO_DDT(QT_INDEX_ELEMOFPAR_TAB_UNICO_DDT)
 
-    def AGG_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6388
+    def AGG_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6368
         self.RIMETTI_DEP_TAB_UNICO_DDT()
         self.INS_TAB_UNICO_DDT()
 
-    def RIMETTI_DEP_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6396
+    def RIMETTI_DEP_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6376
         self.ELE_TAB_UNICO_DDT(QT_INDEX_ELEMOFPAR_TAB_UNICO_DDT) = self.DEP_TAB_UNICO_DDT
 
-    def INS_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6401
+    def INS_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6381
         self.QT_FUNZIONEOFPAR_TAB_UNICO_DDT = "K1"
         print("AS=",self.TAB_AS," CL=",self.TAB_CL," GIA' INSERITI CON CAPI ",self.TAB_MAX_CAPI)
         print("TAB-UNICO-DDT PIENA >> ALLARGARE")
         self.ERR_DISP = self.QT_STATOOFPAR_TAB_UNICO_DDT
         print("ERR k1 QTABELXL ",self.ERR_DISP," TAB-TAB-UNICO-DDT")
 
-    def MOSTRA_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6427
+    def MOSTRA_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6407
         self.M_DEP_TAB_UNICO_DDT()
         print(" ")
 
-    def M_DEP_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6438
+    def M_DEP_TAB_UNICO_DDT(self):	# Linea Source Cobol: 6418
         self.PRENDI_DEP_TAB_UNICO_DDT()
         print(self.DEP_TAB_UNICO_DDT)
         print("AS = ",self.TAB_ASOFDEP_TAB_UNICO_DDT,"  ","CL = ",self.TAB_CLOFDEP_TAB_UNICO_DDT,"  ","MAX-CAPI = ",self.TAB_MAX_CAPIOFDEP_TAB_UNICO_DDT,"  ")
 
-    def CICLO_DISIMPEGNO(self):	# Linea Source Cobol: 6455
+    def CICLO_DISIMPEGNO(self):	# Linea Source Cobol: 6435
         self.PRENDI_DEP_TAB_UNICO_DDT()
         print(self.DEP_TAB_UNICO_DDT)
         self.MAG_DISIMPEGNA = self.MAG_INPUT

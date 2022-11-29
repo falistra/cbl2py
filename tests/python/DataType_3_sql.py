@@ -1,6 +1,19 @@
 
-SQL0 = """
-                                                 
+# Cobol source line :  32
+SQL0 = """  BEGIN DECLARE SECTION ."""
+# Cobol source line :  34
+SQL1 = """  END DECLARE SECTION ."""
+# Cobol source line :  43
+SQL2 = """   
+                BULK SELECT NEGOZIO                                     
+                INTO :TAB-B2C-NO-DT                                     
+                FROM NEGOZIO_ANAG_CATEGORIA 
+                   JOIN NEGOZIO_CATEGORIA USING (ID_CATEGORIA)
+                   where DESC_CATEGORIA = 'NEGOZI_ITALIA_B2C_SOC' 
+                   order by NEGOZIO                                     
+           """
+# Cobol source line :  63
+SQL3 = """                                                  
        
                SELECT 
                    P.prezzo
@@ -19,8 +32,4 @@ SQL0 = """
                     AND P.f_listino_rif = :CC-LISTINO                   
                     AND P.tipo_prezzo = :CC-TIPO-PREZZO                 
        
-                           
-"""
-
-
-            
+               """

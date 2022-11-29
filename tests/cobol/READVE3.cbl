@@ -880,7 +880,7 @@
 064200 01 PREZZO-PUBBL        PIC S9(9) COMP.                                   
 064300*                                                                         
 064400*PRZ-PUBBL*                                                               
-064500 EXEC SQL BEGIN DECLARE SECTION END-EXEC.                                 
+064500*EXEC SQL BEGIN DECLARE SECTION END-EXEC.                                 
 064600*                                                                         
       * NO-DATGE                                                        inizio 
 064700* EXEC SQL INCLUDE MODELLI.IF END-EXEC. 
@@ -907,7 +907,7 @@
             10 MAG-B2C-NO-DT  PIC S9(4) COMP.
       *ASOLOB2C*                                                        fine 
        
-065100 EXEC SQL END DECLARE SECTION END-EXEC.                                   
+065100*EXEC SQL END DECLARE SECTION END-EXEC.                                   
 065200*                                                                         
 065300 01 SQL-CONST             COPY SQLCONST .                       
 065400 01 PAR-ERR               COPY PARERR .                         
@@ -1032,7 +1032,7 @@
 066900*                                                                         
 067000 01 W-COMMON COPY WCOMMONW.                                               
 067100*                                                                         
-067200 EXEC SQL INCLUDE SQLCA END-EXEC.                                         
+067200*EXEC SQL INCLUDE SQLCA END-EXEC.                                         
 067300*                                                                         
 067400 01 SALTO PIC S9(4) COMP.                                                 
 067500*                                                                         

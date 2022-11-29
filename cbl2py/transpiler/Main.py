@@ -9,6 +9,9 @@ from cbl2py.transpiler.batch.batchcode import Batch
 
 import os
 
+import logging
+LOG = logging.getLogger()
+
 def Main(cobolfilename,copybookdirectory,pythonfilename,outPreprocessoFile=None):
     with open(cobolfilename, encoding='utf8') as cobolCodeFile:
         cobolCode : str = cobolCodeFile.read()    
@@ -19,8 +22,9 @@ def Main(cobolfilename,copybookdirectory,pythonfilename,outPreprocessoFile=None)
         params.setPythonSQLfile(pythonSQLfile)
         params.setCopyBookDirectories([copybookdirectory])
         outPreProcessor : str = cobolPreprocessor.process(cobolCode,params)
+        LOG.info("FASE DI PREPROCESSOR TERMINATA")
         if (outPreprocessoFile):
-            print(outPreProcessor)
+            open(outPreprocessoFile,"w").write(outPreProcessor)
         # lexer
         data = InputStream(outPreProcessor)
         lexer = CobolLexer(data)

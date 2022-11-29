@@ -29,12 +29,31 @@
         05 BARUNI-S            PIC X(13).    
 
           COPY NTG. 
-       EXEC SQL INCLUDE ANACST.IF END-EXEC.       
+       EXEC SQL BEGIN DECLARE SECTION END-EXEC.
+       EXEC SQL INCLUDE ANACST.IF END-EXEC.
+       EXEC SQL END DECLARE SECTION END-EXEC. 
+           
        
        PROCEDURE DIVISION.
           DISPLAY "WS-NUM1 : "WS-NUM1.
           DISPLAY "WS-NAME : "WS-NAME.
           DISPLAY "WS-ID   : "WS-ID.
+
+075530 SE-SELECT-NEGOZIO-CATEG.                                                        
+075540     EXEC SQL  
+075550          BULK SELECT NEGOZIO                                               
+075570          INTO :TAB-B2C-NO-DT                                             
+075580          FROM NEGOZIO_ANAG_CATEGORIA 
+                   JOIN NEGOZIO_CATEGORIA USING (ID_CATEGORIA)
+                   where DESC_CATEGORIA = 'NEGOZI_ITALIA_B2C_SOC' 
+                   order by NEGOZIO                                               
+075610     END-EXEC                                                             
+075620     MOVE "SELECT NEGOZIO-CATEG  " TO ER-DESCRIZIONE                          
+075630     IF SQLCODE NOT = MULTIPLE-ROWS                                       
+075640        PERFORM TEST-ERR THRU TEST-ERR-EX.                                
+075650 SE-SELECT-NEGOZIO-CATEG-EX.                                                     
+075660     EXIT.   
+
 
         SELEZIONA-PREZZO-DBG.
            PERFORM WITH TEST AFTER                                              

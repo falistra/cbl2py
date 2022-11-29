@@ -28,8 +28,8 @@ def XData(ctx:CobolParser.DataDescriptionEntryFormat1Context):
     # for p in dir_ctx:
     #     LOG.debug(p)
     
-    if (ctx.dataRedefinesClause()):
-        LOG.debug("dataRedefinesClause")
+    # if (ctx.dataRedefinesClause()):
+    #     LOG.debug("dataRedefinesClause")
     # elif (ctx.dataIntegerStringClause()):
     #     LOG.debug("dataIntegerStringClause")
     # elif (ctx.dataExternalClause()):
@@ -85,7 +85,8 @@ def XData(ctx:CobolParser.DataDescriptionEntryFormat1Context):
                             else:
                                 value = vci.dataValueIntervalFrom().literal().getText()
     elif (ctx.dataRedefinesClause()):
-        LOG.debug("dataRedefinesClause")
+        pass
+        # LOG.debug("dataRedefinesClause")
 
     if ctx.INTEGERLITERAL:
         level = ctx.INTEGERLITERAL
